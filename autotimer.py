@@ -56,6 +56,7 @@ try:
                     activeList.activities.append(activity)  
                 with open('activities.json', 'w') as json_file:  
                     json.dump(activeList.serialize(), json_file, indent=4, sort_keys=True)
+                    start_time = datetime.datetime.now()
             first_time = False
             active_window_name = new_window_name
 

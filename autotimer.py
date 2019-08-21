@@ -12,26 +12,33 @@ activity_name = ""
 start_time = datetime.datetime.now()
 activeList = AcitivyList([]) 
 first_time = True
+
+
+def url_to_name(url):
+    string_list = url.split('/')
+    return string_list[2]
+
 try:
     activeList.initialize_me()
 except Exception:
     print('No json')
 
+
 try:
     while True:
+        previous_site = ""
         new_window_name = (NSWorkspace.sharedWorkspace()
         .activeApplication()['NSApplicationName'])
+        
+        if new_window_name == 'Google Chrome':
+            textOfMyScript = """tell app "google chrome" to get the url of the active tab of window 1"""
+            s = NSAppleScript.initWithSource_(NSAppleScript.alloc(), textOfMyScript)
+            results, err = s.executeAndReturnError_(None)
+            new_window_name = url_to_name(results.stringValue())
+
         if active_window_name != new_window_name:
-            active_window_name = new_window_name
             print(active_window_name)
-            if active_window_name == 'Google Chrome':
-                textOfMyScript = """tell app "google chrome" to get the url of the active tab of window 1"""
-                s = NSAppleScript.initWithSource_(NSAppleScript.alloc(), textOfMyScript)
-                results, err = s.executeAndReturnError_(None)
-                print(results.stringValue())
-                activity_name = results.stringValue()
-            else:
-                activity_name = active_window_name
+            activity_name = active_window_name
             
             if not first_time:
                 end_time = datetime.datetime.now()
@@ -48,9 +55,13 @@ try:
                     activity = Activity(activity_name, [time_entry])
                     activeList.activities.append(activity)  
                 with open('activities.json', 'w') as json_file:  
-                    json.dump(activeList.serialize(), json_file)
+                    json.dump(activeList.serialize(), json_file, indent=4, sort_keys=True)
             first_time = False
+            active_window_name = new_window_name
+
+
         time.sleep(10)
 except KeyboardInterrupt:
     with open('activities.json', 'w') as json_file:  
-        json.dump(activeList.serialize(), json_file)
+        json.dump(activeList.serialize(), json_file, indent=4, sort_keys=True)
+

@@ -94,11 +94,9 @@ class TimeEntry:
         self.seconds = self.seconds % 60
 
     def serialize(self):
-        print(self.total_time)
         return {
             'start_time' : self.start_time.strftime("%Y-%m-%d %H:%M:%S"),
             'end_time' : self.end_time.strftime("%Y-%m-%d %H:%M:%S"),
-            'total_time' : self.total_time.strftime("%Y-%m-%d %H:%M:%S"),
             'days' : self.days,
             'hours' : self.hours,
             'minutes' : self.minutes,

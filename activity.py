@@ -23,7 +23,7 @@ class AcitivyList:
             return_list.append(
                 Activity(
                     name = activity['name'],
-                    time_entries = get_time_entires_from_json(activity['time_entires']),
+                    time_entries = self.get_time_entires_from_json(activity),
                 )
             )
         self.activities = return_list
@@ -34,9 +34,8 @@ class AcitivyList:
         for entry in data['time_entries']:
             return_list.append(
                 TimeEntry(
-                    start_time = parser.parse(entry['post_date']),
+                    start_time = parser.parse(entry['start_time']),
                     end_time = parser.parse(entry['end_time']),
-                    total_time = parser.parse(entry['total_time']),
                     days = entry['days'],
                     hours = entry['hours'],
                     minutes = entry['minutes'],
@@ -60,9 +59,9 @@ class AcitivyList:
 
 
 class Activity:
-    def __init__(self, name, time):
+    def __init__(self, name, time_entries):
         self.name = name
-        self.time_entries = time
+        self.time_entries = time_entries
 
     def serialize(self):
         return {

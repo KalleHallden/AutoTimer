@@ -18,10 +18,10 @@ def url_to_name(url):
     string_list = url.split('/')
     return string_list[2]
 
-# try:
-activeList.initialize_me()
-# except Exception:
-#     print('No json')
+try:
+    activeList.initialize_me()
+except Exception:
+    print('No json')
 
 
 try:

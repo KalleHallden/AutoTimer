@@ -10,7 +10,7 @@ import datetime
 active_window_name = ""
 activity_name = ""
 start_time = datetime.datetime.now()
-activeList = AcitivyList([]) 
+activeList = AcitivyList([])
 first_time = True
 
 
@@ -53,8 +53,8 @@ try:
             
                 if not exists:
                     activity = Activity(activity_name, [time_entry])
-                    activeList.activities.append(activity)  
-                with open('activities.json', 'w') as json_file:  
+                    activeList.activities.append(activity)
+                with open('activities.json', 'w') as json_file:
                     json.dump(activeList.serialize(), json_file, indent=4, sort_keys=True)
                     start_time = datetime.datetime.now()
             first_time = False

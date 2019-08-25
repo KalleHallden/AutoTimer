@@ -85,7 +85,7 @@ class TimeEntry:
         self.hours = hours
         self.minutes = minutes
         self.seconds = seconds
-    
+        
     def _get_specific_times(self):
         self.days, self.seconds = self.total_time.days, self.total_time.seconds
         self.hours = self.days * 24 + self.seconds // 3600

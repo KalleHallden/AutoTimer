@@ -2,4 +2,4 @@
 
 Dependencies:
 
-- selenium
+- python-dateutil

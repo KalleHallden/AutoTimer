@@ -1,0 +1,1794 @@
+{
+    "activities": [
+        {
+            "name": "mitesh@oxy: ~/F/python projects/time_tracker_linux", 
+            "time_entries": [
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 17:55:19", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 17:55:09"
+                }
+            ]
+        }, 
+        {
+            "name": "Google Chrome", 
+            "time_entries": [
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 17:59:29", 
+                    "hours": 0, 
+                    "minutes": 4, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 17:55:19"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 18:09:31", 
+                    "hours": 0, 
+                    "minutes": 9, 
+                    "seconds": 51, 
+                    "start_time": "2019-08-25 17:59:40"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 18:26:23", 
+                    "hours": 0, 
+                    "minutes": 16, 
+                    "seconds": 1, 
+                    "start_time": "2019-08-25 18:10:21"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 18:28:13", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 50, 
+                    "start_time": "2019-08-25 18:27:23"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 19:01:07", 
+                    "hours": 0, 
+                    "minutes": 1, 
+                    "seconds": 30, 
+                    "start_time": "2019-08-25 18:59:37"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 19:33:31", 
+                    "hours": 0, 
+                    "minutes": 32, 
+                    "seconds": 13, 
+                    "start_time": "2019-08-25 19:01:17"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 19:35:01", 
+                    "hours": 0, 
+                    "minutes": 1, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 19:33:51"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 19:35:41", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 20, 
+                    "start_time": "2019-08-25 19:35:21"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 19:36:41", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 50, 
+                    "start_time": "2019-08-25 19:35:51"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 19:38:42", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 20, 
+                    "start_time": "2019-08-25 19:38:21"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 19:39:42", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 19:39:32"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 19:41:32", 
+                    "hours": 0, 
+                    "minutes": 1, 
+                    "seconds": 40, 
+                    "start_time": "2019-08-25 19:39:52"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 19:42:02", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 19:41:52"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 19:45:42", 
+                    "hours": 0, 
+                    "minutes": 2, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 19:43:32"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 19:48:23", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 20, 
+                    "start_time": "2019-08-25 19:48:03"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 19:50:33", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 30, 
+                    "start_time": "2019-08-25 19:50:03"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 19:51:03", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 19:50:53"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 19:52:03", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 40, 
+                    "start_time": "2019-08-25 19:51:23"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 19:55:44", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 40, 
+                    "start_time": "2019-08-25 19:55:04"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 19:58:54", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 20, 
+                    "start_time": "2019-08-25 19:58:34"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 20:02:15", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 40, 
+                    "start_time": "2019-08-25 20:01:34"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 20:03:35", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 30, 
+                    "start_time": "2019-08-25 20:03:05"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 20:15:26", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 20:15:16"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 20:16:06", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 20:15:56"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 20:28:18", 
+                    "hours": 0, 
+                    "minutes": 10, 
+                    "seconds": 1, 
+                    "start_time": "2019-08-25 20:18:17"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 20:59:42", 
+                    "hours": 0, 
+                    "minutes": 6, 
+                    "seconds": 20, 
+                    "start_time": "2019-08-25 20:53:21"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:01:20", 
+                    "hours": 1, 
+                    "minutes": 1, 
+                    "seconds": 27, 
+                    "start_time": "2019-08-25 20:59:52"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:54:36", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 22:54:26"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:56:46", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 40, 
+                    "start_time": "2019-08-25 22:56:06"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:58:07", 
+                    "hours": 0, 
+                    "minutes": 1, 
+                    "seconds": 0, 
+                    "start_time": "2019-08-25 22:57:06"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 23:18:49", 
+                    "hours": 0, 
+                    "minutes": 20, 
+                    "seconds": 32, 
+                    "start_time": "2019-08-25 22:58:17"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 23:19:19", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 23:19:09"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 23:41:32", 
+                    "hours": 0, 
+                    "minutes": 2, 
+                    "seconds": 0, 
+                    "start_time": "2019-08-25 23:39:32"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 23:42:42", 
+                    "hours": 0, 
+                    "minutes": 1, 
+                    "seconds": 0, 
+                    "start_time": "2019-08-25 23:41:42"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 23:45:32", 
+                    "hours": 0, 
+                    "minutes": 2, 
+                    "seconds": 40, 
+                    "start_time": "2019-08-25 23:42:52"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-26 00:07:45", 
+                    "hours": 0, 
+                    "minutes": 21, 
+                    "seconds": 42, 
+                    "start_time": "2019-08-25 23:46:03"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-26 00:08:05", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-26 00:07:55"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-26 00:18:46", 
+                    "hours": 0, 
+                    "minutes": 9, 
+                    "seconds": 41, 
+                    "start_time": "2019-08-26 00:09:05"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-26 00:29:28", 
+                    "hours": 0, 
+                    "minutes": 1, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-26 00:28:18"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-26 00:30:28", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 40, 
+                    "start_time": "2019-08-26 00:29:48"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-26 00:33:19", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 20, 
+                    "start_time": "2019-08-26 00:32:59"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-26 00:33:49", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 20, 
+                    "start_time": "2019-08-26 00:33:29"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-26 00:35:19", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 40, 
+                    "start_time": "2019-08-26 00:34:39"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-26 00:36:29", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 20, 
+                    "start_time": "2019-08-26 00:36:09"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-26 00:39:39", 
+                    "hours": 0, 
+                    "minutes": 2, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-26 00:37:29"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-26 00:59:52", 
+                    "hours": 0, 
+                    "minutes": 19, 
+                    "seconds": 52, 
+                    "start_time": "2019-08-26 00:40:00"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-26 09:39:05", 
+                    "hours": 8, 
+                    "minutes": 39, 
+                    "seconds": 3, 
+                    "start_time": "2019-08-26 01:00:02"
+                }
+            ]
+        }, 
+        {
+            "name": "System Monitor", 
+            "time_entries": [
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 17:59:40", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 17:59:29"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-26 01:00:02", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-26 00:59:52"
+                }
+            ]
+        }, 
+        {
+            "name": null, 
+            "time_entries": [
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 18:09:41", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 18:09:31"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 20:01:24", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 20:01:14"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:06:00", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 22:05:50"
+                }
+            ]
+        }, 
+        {
+            "name": "Pebble JukeBox", 
+            "time_entries": [
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 18:10:11", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 30, 
+                    "start_time": "2019-08-25 18:09:41"
+                }
+            ]
+        }, 
+        {
+            "name": "Settings", 
+            "time_entries": [
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 18:10:21", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 18:10:11"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:54:56", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 22:54:46"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:55:56", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 20, 
+                    "start_time": "2019-08-25 22:55:36"
+                }
+            ]
+        }, 
+        {
+            "name": "Spotify", 
+            "time_entries": [
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 18:26:33", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 18:26:23"
+                }
+            ]
+        }, 
+        {
+            "name": "Spotify Free", 
+            "time_entries": [
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 18:26:43", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 18:26:33"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 18:38:54", 
+                    "hours": 0, 
+                    "minutes": 2, 
+                    "seconds": 30, 
+                    "start_time": "2019-08-25 18:36:24"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 19:33:41", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 19:33:31"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 20:28:28", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 20:28:18"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 23:41:42", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 23:41:32"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 23:42:52", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 23:42:42"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 23:46:03", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 30, 
+                    "start_time": "2019-08-25 23:45:32"
+                }
+            ]
+        }, 
+        {
+            "name": "Kalank (Bonus Track)", 
+            "time_entries": [
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 18:27:23", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 40, 
+                    "start_time": "2019-08-25 18:26:43"
+                }
+            ]
+        }, 
+        {
+            "name": "The Winding Paths", 
+            "time_entries": [
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 18:28:33", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 20, 
+                    "start_time": "2019-08-25 18:28:13"
+                }
+            ]
+        }, 
+        {
+            "name": "Gamma Sinus 50 Hz", 
+            "time_entries": [
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 18:32:03", 
+                    "hours": 0, 
+                    "minutes": 3, 
+                    "seconds": 30, 
+                    "start_time": "2019-08-25 18:28:33"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 20:31:59", 
+                    "hours": 0, 
+                    "minutes": 3, 
+                    "seconds": 30, 
+                    "start_time": "2019-08-25 20:28:28"
+                }
+            ]
+        }, 
+        {
+            "name": "Binaural Gamma 40 Hz", 
+            "time_entries": [
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 18:34:04", 
+                    "hours": 0, 
+                    "minutes": 2, 
+                    "seconds": 0, 
+                    "start_time": "2019-08-25 18:32:03"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 20:33:59", 
+                    "hours": 0, 
+                    "minutes": 2, 
+                    "seconds": 0, 
+                    "start_time": "2019-08-25 20:31:59"
+                }
+            ]
+        }, 
+        {
+            "name": "Advertisement", 
+            "time_entries": [
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 18:34:34", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 30, 
+                    "start_time": "2019-08-25 18:34:04"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 20:48:01", 
+                    "hours": 0, 
+                    "minutes": 14, 
+                    "seconds": 1, 
+                    "start_time": "2019-08-25 20:33:59"
+                }
+            ]
+        }, 
+        {
+            "name": "Alertness", 
+            "time_entries": [
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 18:36:24", 
+                    "hours": 0, 
+                    "minutes": 1, 
+                    "seconds": 50, 
+                    "start_time": "2019-08-25 18:34:34"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 18:59:37", 
+                    "hours": 0, 
+                    "minutes": 20, 
+                    "seconds": 42, 
+                    "start_time": "2019-08-25 18:38:54"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 19:01:17", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 19:01:07"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 20:53:21", 
+                    "hours": 0, 
+                    "minutes": 5, 
+                    "seconds": 20, 
+                    "start_time": "2019-08-25 20:48:01"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 20:59:52", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 20:59:42"
+                }
+            ]
+        }, 
+        {
+            "name": "Eclipse IDE Launcher", 
+            "time_entries": [
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 19:33:51", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 19:33:41"
+                }
+            ]
+        }, 
+        {
+            "name": "Eclipse IDE", 
+            "time_entries": [
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 19:35:21", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 20, 
+                    "start_time": "2019-08-25 19:35:01"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 19:35:51", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 19:35:41"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 19:38:21", 
+                    "hours": 0, 
+                    "minutes": 1, 
+                    "seconds": 40, 
+                    "start_time": "2019-08-25 19:36:41"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 19:39:32", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 50, 
+                    "start_time": "2019-08-25 19:38:42"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 19:41:52", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 20, 
+                    "start_time": "2019-08-25 19:41:32"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 19:43:32", 
+                    "hours": 0, 
+                    "minutes": 1, 
+                    "seconds": 30, 
+                    "start_time": "2019-08-25 19:42:02"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 19:48:03", 
+                    "hours": 0, 
+                    "minutes": 2, 
+                    "seconds": 20, 
+                    "start_time": "2019-08-25 19:45:42"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 19:50:03", 
+                    "hours": 0, 
+                    "minutes": 1, 
+                    "seconds": 40, 
+                    "start_time": "2019-08-25 19:48:23"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 19:50:53", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 20, 
+                    "start_time": "2019-08-25 19:50:33"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 19:51:23", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 20, 
+                    "start_time": "2019-08-25 19:51:03"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 19:55:04", 
+                    "hours": 0, 
+                    "minutes": 3, 
+                    "seconds": 0, 
+                    "start_time": "2019-08-25 19:52:03"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 19:58:34", 
+                    "hours": 0, 
+                    "minutes": 2, 
+                    "seconds": 50, 
+                    "start_time": "2019-08-25 19:55:44"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 20:01:14", 
+                    "hours": 0, 
+                    "minutes": 2, 
+                    "seconds": 20, 
+                    "start_time": "2019-08-25 19:58:54"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 20:01:34", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 20:01:24"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 20:03:05", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 50, 
+                    "start_time": "2019-08-25 20:02:15"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 20:10:36", 
+                    "hours": 0, 
+                    "minutes": 7, 
+                    "seconds": 0, 
+                    "start_time": "2019-08-25 20:03:35"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 20:12:56", 
+                    "hours": 0, 
+                    "minutes": 2, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 20:10:46"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 20:15:16", 
+                    "hours": 0, 
+                    "minutes": 2, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 20:13:06"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 20:15:36", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 20:15:26"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 20:15:56", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 20:15:46"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 20:17:57", 
+                    "hours": 0, 
+                    "minutes": 1, 
+                    "seconds": 50, 
+                    "start_time": "2019-08-25 20:16:06"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 20:18:17", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 20:18:07"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-26 00:29:48", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 20, 
+                    "start_time": "2019-08-26 00:29:28"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-26 00:30:38", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-26 00:30:28"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-26 00:31:28", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 40, 
+                    "start_time": "2019-08-26 00:30:48"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-26 00:32:59", 
+                    "hours": 0, 
+                    "minutes": 1, 
+                    "seconds": 0, 
+                    "start_time": "2019-08-26 00:31:58"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-26 00:33:29", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-26 00:33:19"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-26 00:34:39", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 50, 
+                    "start_time": "2019-08-26 00:33:49"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-26 00:36:09", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 50, 
+                    "start_time": "2019-08-26 00:35:19"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-26 00:36:49", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-26 00:36:39"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-26 00:37:19", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 20, 
+                    "start_time": "2019-08-26 00:36:59"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-26 00:39:59", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 20, 
+                    "start_time": "2019-08-26 00:39:39"
+                }
+            ]
+        }, 
+        {
+            "name": "Pachtaoge (From \"Jaani Ve\")", 
+            "time_entries": [
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 19:39:52", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 19:39:42"
+                }
+            ]
+        }, 
+        {
+            "name": "Run Configurations", 
+            "time_entries": [
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 20:10:46", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 20:10:36"
+                }
+            ]
+        }, 
+        {
+            "name": "Applet Viewer: module6.EarthquakeCityMap.class", 
+            "time_entries": [
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 20:13:06", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 20:12:56"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 20:15:46", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 20:15:36"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 20:18:07", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 20:17:57"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-26 00:07:55", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-26 00:07:45"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-26 00:08:55", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 50, 
+                    "start_time": "2019-08-26 00:08:05"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-26 00:30:48", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-26 00:30:38"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-26 00:36:59", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-26 00:36:49"
+                }
+            ]
+        }, 
+        {
+            "name": "Desktop", 
+            "time_entries": [
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:01:30", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 22:01:20"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:06:50", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 40, 
+                    "start_time": "2019-08-25 22:06:10"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:08:00", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 22:07:50"
+                }
+            ]
+        }, 
+        {
+            "name": "Home", 
+            "time_entries": [
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:01:50", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 20, 
+                    "start_time": "2019-08-25 22:01:30"
+                }
+            ]
+        }, 
+        {
+            "name": "Videos", 
+            "time_entries": [
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:02:00", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 22:01:50"
+                }
+            ]
+        }, 
+        {
+            "name": "/", 
+            "time_entries": [
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:02:10", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 22:02:00"
+                }
+            ]
+        }, 
+        {
+            "name": "movieeeeeeeeeeeeeeeeeeeeeeeeeeee", 
+            "time_entries": [
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:02:20", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 22:02:10"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:08:41", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 22:08:31"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:11:11", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 22:11:01"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:11:51", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 22:11:41"
+                }
+            ]
+        }, 
+        {
+            "name": "Avengers Infinity War (2018) [WEBRip] [720p] [YTS.AM]", 
+            "time_entries": [
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:02:30", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 22:02:20"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:04:20", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 20, 
+                    "start_time": "2019-08-25 22:04:00"
+                }
+            ]
+        }, 
+        {
+            "name": "VLC media player", 
+            "time_entries": [
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:04:00", 
+                    "hours": 0, 
+                    "minutes": 1, 
+                    "seconds": 30, 
+                    "start_time": "2019-08-25 22:02:30"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:07:50", 
+                    "hours": 0, 
+                    "minutes": 1, 
+                    "seconds": 0, 
+                    "start_time": "2019-08-25 22:06:50"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:08:21", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 20, 
+                    "start_time": "2019-08-25 22:08:00"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:09:11", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 20, 
+                    "start_time": "2019-08-25 22:08:51"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:10:01", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 20, 
+                    "start_time": "2019-08-25 22:09:41"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:11:01", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 50, 
+                    "start_time": "2019-08-25 22:10:11"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:11:41", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 30, 
+                    "start_time": "2019-08-25 22:11:11"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:13:51", 
+                    "hours": 0, 
+                    "minutes": 1, 
+                    "seconds": 40, 
+                    "start_time": "2019-08-25 22:12:11"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:14:11", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 22:14:01"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:15:31", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 50, 
+                    "start_time": "2019-08-25 22:14:41"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:16:22", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 40, 
+                    "start_time": "2019-08-25 22:15:41"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:17:32", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 50, 
+                    "start_time": "2019-08-25 22:16:42"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:18:02", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 20, 
+                    "start_time": "2019-08-25 22:17:42"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:18:32", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 20, 
+                    "start_time": "2019-08-25 22:18:12"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:19:52", 
+                    "hours": 0, 
+                    "minutes": 1, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 22:18:42"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:21:12", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 40, 
+                    "start_time": "2019-08-25 22:20:32"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:25:03", 
+                    "hours": 0, 
+                    "minutes": 3, 
+                    "seconds": 40, 
+                    "start_time": "2019-08-25 22:21:22"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:31:13", 
+                    "hours": 0, 
+                    "minutes": 5, 
+                    "seconds": 50, 
+                    "start_time": "2019-08-25 22:25:23"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:32:23", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 50, 
+                    "start_time": "2019-08-25 22:31:33"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:53:36", 
+                    "hours": 0, 
+                    "minutes": 21, 
+                    "seconds": 2, 
+                    "start_time": "2019-08-25 22:32:33"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-26 00:28:18", 
+                    "hours": 0, 
+                    "minutes": 9, 
+                    "seconds": 21, 
+                    "start_time": "2019-08-26 00:18:56"
+                }
+            ]
+        }, 
+        {
+            "name": "Other Locations", 
+            "time_entries": [
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:04:40", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 20, 
+                    "start_time": "2019-08-25 22:04:20"
+                }
+            ]
+        }, 
+        {
+            "name": "Wicd Network Manager", 
+            "time_entries": [
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:04:50", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 22:04:40"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:54:26", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 50, 
+                    "start_time": "2019-08-25 22:53:36"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:54:46", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 22:54:36"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:55:36", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 40, 
+                    "start_time": "2019-08-25 22:54:56"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:56:06", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 22:55:56"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:57:06", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 20, 
+                    "start_time": "2019-08-25 22:56:46"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:58:17", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 22:58:07"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 23:19:09", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 20, 
+                    "start_time": "2019-08-25 23:18:49"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 23:39:32", 
+                    "hours": 0, 
+                    "minutes": 20, 
+                    "seconds": 12, 
+                    "start_time": "2019-08-25 23:19:19"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-26 00:09:05", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-26 00:08:55"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-26 00:36:39", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-26 00:36:29"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-26 00:37:29", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-26 00:37:19"
+                }
+            ]
+        }, 
+        {
+            "name": "Redmi Note 7 Pro", 
+            "time_entries": [
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:05:00", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 22:04:50"
+                }
+            ]
+        }, 
+        {
+            "name": "movies", 
+            "time_entries": [
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:05:50", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 50, 
+                    "start_time": "2019-08-25 22:05:00"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:06:10", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 22:06:00"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:08:31", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 22:08:21"
+                }
+            ]
+        }, 
+        {
+            "name": "Spinning Man (2018) [720p] [YTS.ME]", 
+            "time_entries": [
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:08:51", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 22:08:41"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:09:21", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 22:09:11"
+                }
+            ]
+        }, 
+        {
+            "name": "Taken 2 (2012)", 
+            "time_entries": [
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:09:41", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 20, 
+                    "start_time": "2019-08-25 22:09:21"
+                }
+            ]
+        }, 
+        {
+            "name": "The 12th Man (2017) [BluRay] [720p] [YTS.AM]", 
+            "time_entries": [
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:10:11", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 22:10:01"
+                }
+            ]
+        }, 
+        {
+            "name": "E", 
+            "time_entries": [
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:12:01", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 22:11:51"
+                }
+            ]
+        }, 
+        {
+            "name": "DOMiNO", 
+            "time_entries": [
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:12:11", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 22:12:01"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:14:01", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 22:13:51"
+                }
+            ]
+        }, 
+        {
+            "name": "First Man (2018) [WEBRip] [720p] [YTS.AM]", 
+            "time_entries": [
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:14:21", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 22:14:11"
+                }
+            ]
+        }, 
+        {
+            "name": "MOVIES", 
+            "time_entries": [
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:14:41", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 20, 
+                    "start_time": "2019-08-25 22:14:21"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:17:42", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 22:17:32"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:18:42", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 22:18:32"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:20:02", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 22:19:52"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:20:22", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 22:20:12"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:21:22", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 22:21:12"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:31:33", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 20, 
+                    "start_time": "2019-08-25 22:31:13"
+                }, 
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:32:33", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 22:32:23"
+                }
+            ]
+        }, 
+        {
+            "name": "The Fighter (2010)7.9", 
+            "time_entries": [
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:15:41", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 22:15:31"
+                }
+            ]
+        }, 
+        {
+            "name": "Rush (2013)", 
+            "time_entries": [
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:16:32", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 22:16:22"
+                }
+            ]
+        }, 
+        {
+            "name": "Ordinary World (2016) [YTS.AG]", 
+            "time_entries": [
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:16:42", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 22:16:32"
+                }
+            ]
+        }, 
+        {
+            "name": "Incredibles 2 (2018) [WEBRip] [720p] [YTS.AM]", 
+            "time_entries": [
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:18:12", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 22:18:02"
+                }
+            ]
+        }, 
+        {
+            "name": "Shawshank", 
+            "time_entries": [
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:20:12", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 22:20:02"
+                }
+            ]
+        }, 
+        {
+            "name": "The Imitation Game (2014)", 
+            "time_entries": [
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:20:32", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-25 22:20:22"
+                }
+            ]
+        }, 
+        {
+            "name": "Open subtitles...", 
+            "time_entries": [
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-25 22:25:23", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 20, 
+                    "start_time": "2019-08-25 22:25:03"
+                }
+            ]
+        }, 
+        {
+            "name": "The Secret Rules Of Modern Living Algorithms (2015) [WEBRip] [1080p] [YTS.AM]", 
+            "time_entries": [
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-26 00:18:56", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 10, 
+                    "start_time": "2019-08-26 00:18:46"
+                }
+            ]
+        }, 
+        {
+            "name": "gedit", 
+            "time_entries": [
+                {
+                    "days": 0, 
+                    "end_time": "2019-08-26 00:31:58", 
+                    "hours": 0, 
+                    "minutes": 0, 
+                    "seconds": 30, 
+                    "start_time": "2019-08-26 00:31:28"
+                }
+            ]
+        }
+    ]
+}

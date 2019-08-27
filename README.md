@@ -5,3 +5,11 @@ Check out this for more https://youtu.be/ZBLYcvPl1MA
 Dependencies:
 
 - selenium
+
+
+Windows Depencies
+
+- pywin32
+- python-dateutil
+- uiautomation 
+

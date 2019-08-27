@@ -1,0 +1,52 @@
+Metadata-Version: 2.1
+Name: pyobjc-framework-SearchKit
+Version: 5.2
+Summary: Wrappers for the framework SearchKit on macOS
+Home-page: https://bitbucket.org/ronaldoussoren/pyobjc
+Author: Ronald Oussoren
+Author-email: pyobjc-dev@lists.sourceforge.net
+License: MIT License
+Keywords: PyObjC,SearchKit
+Platform: MacOS X (>=10.5)
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Console
+Classifier: Environment :: MacOS X :: Cocoa
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Objective C
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Software Development :: User Interfaces
+Description-Content-Type: text/x-rst; charset=UTF-8
+Project-URL: Documentation, https://pyobjc.readthedocs.io/en/latest/
+Project-URL: Issue tracker, https://bitbucket.org/ronaldoussoren/pyobjc/issues?status=new&status=open
+Requires-Dist: pyobjc-core (>=5.2)
+Requires-Dist: pyobjc-framework-CoreServices (>=5.2)
+
+
+Deprecated wrappers for the "SearchKit" framework on macOS.
+
+Use the CoreServices package instead.
+
+
+Project links
+-------------
+
+* `Documentation <https://pyobjc.readthedocs.io/en/latest/>`_
+
+* `Issue Tracker <https://bitbucket.org/ronaldoussoren/pyobjc/issues?status=new&status=open>`_
+
+* `Repository <https://bitbucket.org/ronaldoussoren/pyobjc/>`_
+
+
+

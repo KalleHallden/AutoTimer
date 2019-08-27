@@ -69,3 +69,4 @@ def get_active_window_x():
     detail_list = None if None else full_detail.split(" - ")
     new_window_name = detail_list[-1]
     return new_window_name
+

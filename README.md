@@ -14,16 +14,17 @@ Check out this for more https://youtu.be/ZBLYcvPl1MA
 
 ## Installing
 
-- 1. Run requirements file
+- 1.  Run requirements file
 
-     `sudo pip install -r requirements.py`
+            `sudo pip install -r requirements.py`
 
-- 2. Run
-     `python autotimer.py`
+- 2.  Run
 
-  Dependencies:
+            `python autotimer.py`
 
-* selenium
+## Dependencies:
+
+- selenium
 
 Windows Depencies
 

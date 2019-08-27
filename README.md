@@ -2,7 +2,7 @@ Tracking the desktop applications in real time and time spent on each applicatio
 
 Check out this for more https://youtu.be/ZBLYcvPl1MA
 
-## Setup instructions
+## Setup instructions:
 
 - 1.  Clone this repository.
 
@@ -12,15 +12,15 @@ Check out this for more https://youtu.be/ZBLYcvPl1MA
 
             cd auto_timer
 
-## Installing
+## Install and Run:
 
 - 1.  Run requirements file
 
-            `sudo pip install -r requirements.py`
+            sudo pip install -r requirements.py
 
 - 2.  Run
 
-            `python autotimer.py`
+            python autotimer.py
 
 ## Dependencies:
 

@@ -133,6 +133,7 @@ celerybeat-schedule
 .env
 .venv
 env/
+p3env/
 venv/
 ENV/
 env.bak/

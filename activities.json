@@ -1,0 +1,17 @@
+{
+    "activities": [
+        {
+            "name": "iTerm2",
+            "time_entries": [
+                {
+                    "days": 0,
+                    "end_time": "2019-08-30 18:17:54",
+                    "hours": 0,
+                    "minutes": 0,
+                    "seconds": 3,
+                    "start_time": "2019-08-30 18:17:51"
+                }
+            ]
+        }
+    ]
+}

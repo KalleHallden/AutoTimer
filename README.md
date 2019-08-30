@@ -13,3 +13,8 @@ Windows Depencies
 - python-dateutil
 - uiautomation 
 
+Create environtment
+
+    $ python3 -m venv p3env
+    $ source p3env/bin/activate
+

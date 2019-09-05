@@ -17,7 +17,7 @@ elif sys.platform in ['linux', 'linux2']:
 active_window_name = ""
 activity_name = ""
 start_time = datetime.datetime.now()
-activeList = AcitivyList([])
+activeList = ActivityList([])
 first_time = True
 
 

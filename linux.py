@@ -28,11 +28,8 @@ def get_active_window_raw():
     if match != None:
         ret = match.group("name").strip(b'"')
         #print(type(ret))
-        '''
-        ret is str for python2
-        ret is bytes for python3 (- gives error while calling in other file)
-        be careful
-        '''
+        if sys.version[0] == '3': # if compiler is python 3
+            return ret.decode()
         return ret
     return None
 

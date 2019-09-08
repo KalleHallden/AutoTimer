@@ -28,7 +28,7 @@ def get_active_window_raw():
     if match != None:
         ret = match.group("name").strip(b'"')
         #print(type(ret))
-        if sys.version[0] == '3': # if compiler is python 3
+        if sys.version_info.major > 2:  # Python version is 3 or later
             return ret.decode()
         return ret
     return None

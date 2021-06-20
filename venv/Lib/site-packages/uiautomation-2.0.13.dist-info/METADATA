@@ -1,0 +1,20 @@
+Metadata-Version: 2.1
+Name: uiautomation
+Version: 2.0.13
+Summary: Python UIAutomation for Windows
+Home-page: https://github.com/yinkaisheng/Python-UIAutomation-for-Windows
+Author: yinkaisheng
+Author-email: yinkaisheng@live.com
+License: Apache 2.0
+Keywords: windows ui automation uiautomation inspect
+Platform: Windows Only
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+License-File: LICENSE
+Requires-Dist: comtypes (>=1.1.10)
+
+Python UIAutomation for Windows. Supports Python3.4+, x86, x64
+

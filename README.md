@@ -1,28 +1,30 @@
 # AutoTimer
 
 ---
-###Here's original writing by original author: [Kalle Hallden](https://github.com/KalleHallden)
+### Here's original writing by original author: [Kalle Hallden](https://github.com/KalleHallden)
 Auto timer is used to track the desktop applications in real time and time spent on each application.
 
 Check out this for more https://youtu.be/ZBLYcvPl1MA
 
-Dependencies:
+#### Dependencies:
+
 - selenium
 
-Windows Depencies
+#### Windows Depencies
+
 - pywin32
 - python-dateutil
 - uiautomation
 
 ---
-###Here's what I added
-####Environment
+### Here's what I added
+#### Environment
 
 - Windows 10
 - IDE: PyCharm
 - Python 3.6
 
-####Windows Dependencies
+#### Windows Dependencies
 
 - pywin32
 - python-dateutil

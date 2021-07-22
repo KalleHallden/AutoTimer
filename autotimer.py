@@ -1,19 +1,13 @@
-from __future__ import print_function
 import time
-from activity import *
-import json
 import datetime
 import subprocess
 import re
 
-
-def url_to_name(url):
-    string_list = url.split('/')
-    return string_list[2]
+from activity import *
 
 
 def get_active_window():
-    """returns the details about the window not just the title"""
+    """Return the details about the window not just the title."""
     root = subprocess.Popen(['xprop', '-root', '_NET_ACTIVE_WINDOW'], stdout=subprocess.PIPE)
     stdout, stderr = root.communicate()
 
@@ -31,49 +25,33 @@ def get_active_window():
     return None
 
 
-if __name__ == '__main__':
-    active_window_name = ""
-    activity_name = ""
+if __name__ == "__main__":
+    active_window = get_active_window()
     start_time = datetime.datetime.now()
     filename = 'activities.json'
     acts = ActivityList()
-    first_time = True
 
     try:
         while True:
             time.sleep(1)
-            previous_site = ""
-            new_window_name = get_active_window()
-            # if 'Google Chrome' in new_window_name:
-            #     new_window_name = l.get_chrome_url_x()
 
-            if active_window_name == new_window_name:
+            new_window = get_active_window()
+            if active_window == new_window:
                 continue
-            print(active_window_name)
-            active_window_name = new_window_name
-
-            if first_time:
-                first_time = False
-                continue
-            first_time = False
+            print(active_window)
+            active_window = new_window
 
             end_time = datetime.datetime.now()
-            time_entry = TimeEntry(start_time, end_time, 0, 0, 0, 0)
-            time_entry.get_specific_times()
+            time_entry = TimeEntry(start_time, end_time, 0, 0, 0, 0, specific=True)
 
-            exists = False
-            for activity in acts.activities:
-                if activity.name == active_window_name:
-                    exists = True
-                    activity.time_entries.append(time_entry)
+            activity = acts.by_name(active_window)
+            if activity:
+                activity.time_entries.append(time_entry)
+            else:
+                acts.activities.append(Activity(active_window, [time_entry]))
 
-            if not exists:
-                activity = Activity(active_window_name, [time_entry])
-                acts.activities.append(activity)
-            with open('activities.json', 'w') as json_file:
-                json.dump(acts.serialize(), json_file, indent=4, sort_keys=True)
-                start_time = datetime.datetime.now()
+            acts.write(filename)
+            start_time = datetime.datetime.now()
 
     except KeyboardInterrupt:
-        with open('activities.json', 'w') as json_file:
-            json.dump(acts.serialize(), json_file, indent=4, sort_keys=True)
+        acts.write(filename)

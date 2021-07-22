@@ -1,4 +1,3 @@
-
 import json
 from dateutil import parser
 
@@ -17,6 +16,10 @@ class ActivityList:
                 ac = Activity(name=activity['name'], time_entries=self.get_time_entries_from_json(activity))
                 activities.append(ac)
         return activities
+
+    def write(self, filename='activities.json'):
+        with open(filename, 'w') as json_file:
+            json.dump(self.serialize(), json_file, indent=4, sort_keys=True)
 
     @staticmethod
     def get_time_entries_from_json(data):
@@ -37,6 +40,11 @@ class ActivityList:
     def serialize(self):
         return {'activities': [activity.serialize() for activity in self.activities]}
 
+    def by_name(self, activity_name):
+        for activity in self.activities:
+            if activity.name == activity_name:
+                return activity
+
 
 class Activity:
     def __init__(self, name, time_entries):
@@ -48,7 +56,7 @@ class Activity:
     
 
 class TimeEntry:
-    def __init__(self, start_time, end_time, days, hours, minutes, seconds):
+    def __init__(self, start_time, end_time, days, hours, minutes, seconds, specific=False):
         self.start_time = start_time
         self.end_time = end_time
         self.total_time = end_time - start_time
@@ -56,6 +64,8 @@ class TimeEntry:
         self.hours = hours
         self.minutes = minutes
         self.seconds = seconds
+        if specific:
+            self.get_specific_times()
     
     def get_specific_times(self):
         self.days, self.seconds = self.total_time.days, self.total_time.seconds

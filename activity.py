@@ -1,30 +1,35 @@
 import json
+from collections import defaultdict
+
 from dateutil import parser
 
 
 class ActivityList:
-    def __init__(self):
-        self.activities = []
+    def __init__(self, filename=None):
+        self.activities = defaultdict(list) if filename is None else self.load(filename)
 
-    def load(self, filename='activities.json'):
-        activities = []
-        with open(filename, 'r') as f:
-            data = json.load(f)
-            if not data:
-                return activities
-            for activity in data['activities']:
-                ac = Activity(name=activity['name'], time_entries=self.get_time_entries_from_json(activity))
-                activities.append(ac)
+    def load(self, filename):
+        try:
+            with open(filename, 'r') as f:
+                data = json.load(f)
+        except (FileNotFoundError, json.decoder.JSONDecodeError):
+            return defaultdict(list)
+        if not data:
+            return defaultdict(list)
+        activities = defaultdict(list)
+        for activity in data['activities']:
+            time_entries = self.get_time_entries_from_json(activity['time_entries'])
+            activities[activity['name']].extend(time_entries)
         return activities
 
-    def write(self, filename='activities.json'):
+    def write(self, filename):
         with open(filename, 'w') as json_file:
             json.dump(self.serialize(), json_file, indent=4, sort_keys=True)
 
     @staticmethod
-    def get_time_entries_from_json(data):
+    def get_time_entries_from_json(time_entries):
         return_list = []
-        for entry in data['time_entries']:
+        for entry in time_entries:
             return_list.append(
                 TimeEntry(
                     start_time=parser.parse(entry['start_time']),
@@ -38,22 +43,16 @@ class ActivityList:
         return return_list
     
     def serialize(self):
-        return {'activities': [activity.serialize() for activity in self.activities]}
+        d = {'activities': []}
+        for name, time_entries in self.activities.items():
+            entry = {'name': name, 'time_entries': [t.serialize() for t in time_entries]}
+            d['activities'].append(entry)
+        return d
 
-    def by_name(self, activity_name):
-        for activity in self.activities:
-            if activity.name == activity_name:
-                return activity
+    # def append(self, activities):
+    #     for a in self.activities:
+    #         if a.name in
 
-
-class Activity:
-    def __init__(self, name, time_entries):
-        self.name = name
-        self.time_entries = time_entries
-
-    def serialize(self):
-        return {'name': self.name, 'time_entries': [t.serialize() for t in self.time_entries]}
-    
 
 class TimeEntry:
     def __init__(self, start_time, end_time, days, hours, minutes, seconds, specific=False):

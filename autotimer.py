@@ -1,9 +1,13 @@
 import time
-import datetime
 import subprocess
 import re
 
+from datetime import datetime
 from activity import *
+
+
+form = '%Y-%m-%d'
+path = 'log/'
 
 
 def get_active_window():
@@ -27,9 +31,11 @@ def get_active_window():
 
 if __name__ == "__main__":
     active_window = get_active_window()
-    start_time = datetime.datetime.now()
-    filename = 'activities.json'
-    acts = ActivityList()
+    start_time = datetime.now()
+
+    today = datetime.today().strftime(form)
+    filename = path + 'log_' + today + '.json'
+    acts = ActivityList(filename=filename)
 
     try:
         while True:
@@ -41,17 +47,12 @@ if __name__ == "__main__":
             print(active_window)
             active_window = new_window
 
-            end_time = datetime.datetime.now()
+            end_time = datetime.now()
             time_entry = TimeEntry(start_time, end_time, 0, 0, 0, 0, specific=True)
 
-            activity = acts.by_name(active_window)
-            if activity:
-                activity.time_entries.append(time_entry)
-            else:
-                acts.activities.append(Activity(active_window, [time_entry]))
-
+            acts.activities[active_window].append(time_entry)
             acts.write(filename)
-            start_time = datetime.datetime.now()
+            start_time = datetime.now()
 
     except KeyboardInterrupt:
         acts.write(filename)

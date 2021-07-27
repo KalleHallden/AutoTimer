@@ -6,21 +6,22 @@ from dateutil import parser
 
 class ActivityList:
     def __init__(self, filename=None):
-        self.activities = defaultdict(list) if filename is None else self.load(filename)
+        self.acts = defaultdict(list) if filename is None else self.load(filename)
 
     def load(self, filename):
         try:
             with open(filename, 'r') as f:
                 data = json.load(f)
-        except (FileNotFoundError, json.decoder.JSONDecodeError):
+        except (FileNotFoundError, json.decoder.JSONDecodeError) as e:
+            print(e)
             return defaultdict(list)
         if not data:
             return defaultdict(list)
-        activities = defaultdict(list)
+        acts = defaultdict(list)
         for activity in data['activities']:
             time_entries = self.get_time_entries_from_json(activity['time_entries'])
-            activities[activity['name']].extend(time_entries)
-        return activities
+            acts[activity['name']].extend(time_entries)
+        return acts
 
     def write(self, filename):
         with open(filename, 'w') as json_file:
@@ -44,14 +45,14 @@ class ActivityList:
     
     def serialize(self):
         d = {'activities': []}
-        for name, time_entries in self.activities.items():
+        for name, time_entries in self.acts.items():
             entry = {'name': name, 'time_entries': [t.serialize() for t in time_entries]}
             d['activities'].append(entry)
         return d
 
-    # def append(self, activities):
-    #     for a in self.activities:
-    #         if a.name in
+    def append(self, acts):
+        for name, time_entries in self.acts.items():
+            acts[name].extend(time_entries)
 
 
 class TimeEntry:

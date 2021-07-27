@@ -35,7 +35,7 @@ if __name__ == "__main__":
 
     today = datetime.today().strftime(form)
     filename = path + 'log_' + today + '.json'
-    acts = ActivityList(filename=filename)
+    al = ActivityList(filename=filename)
 
     try:
         while True:
@@ -50,9 +50,9 @@ if __name__ == "__main__":
             end_time = datetime.now()
             time_entry = TimeEntry(start_time, end_time, 0, 0, 0, 0, specific=True)
 
-            acts.activities[active_window].append(time_entry)
-            acts.write(filename)
+            al.acts[active_window].append(time_entry)
+            al.write(filename)
             start_time = datetime.now()
 
     except KeyboardInterrupt:
-        acts.write(filename)
+        al.write(filename)

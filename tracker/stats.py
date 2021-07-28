@@ -1,21 +1,18 @@
 import os
 from collections import defaultdict
-from datetime import datetime, timedelta
+from datetime import timedelta
 
+from target import Target
 from activity import ActivityList
 
 path = 'log/'
-start_date = datetime.strptime('2021-07-27', '%Y-%m-%d')
+
 
 # keywords for each tag
 tag_to_keys = {
-    'Programming': ['william', 'ai/', 'IPython', 'Source.gv', 'Stack Overflow', 'python', 'Python'],
-    'AGI book': ['book.lyx', 'Inkscape'],
-}
-# target time in hours
-goal = {
-    'Programming': 4,
-    'AGI book': 1,
+    'Programming': ['william', 'IPython', 'Source.gv', 'Stack Overflow', 'python', 'Python'],
+    'AGI book': ['book.lyx', 'book.pdf', 'Inkscape'],
+    'Thinking': ['thoughts_on_AGI.lyx'],
 }
 
 
@@ -62,13 +59,17 @@ def sum_time_entries(time_entries):
     return t
 
 
+def sign(x):
+    return -1 if x < 0 else +1
+
+
 def _hours_minutes(secs):
-    return secs // 3600, (secs % 3600) // 60
+    return int(secs / 3600), sign(secs) * ((abs(secs) % 3600) // 60)
 
 
 def print_overtime(tagged_time):
-    today = datetime.today()
-    days_since_start = (today - start_date).days + 1
+    target = Target()
+    goal = target.sum_by_tag()
     for tag, sum_time in tagged_time.items():
         print("\nActivity: {}".format(tag))
         total_time = _hours_minutes(sum_time.seconds)
@@ -76,7 +77,7 @@ def print_overtime(tagged_time):
         if tag not in goal:
             continue
 
-        target_seconds = days_since_start * goal[tag] * 3600
+        target_seconds = goal[tag] * 3600
         target_time = _hours_minutes(target_seconds)
         overtime = _hours_minutes(sum_time.seconds - target_seconds)
         print("Target time: {} hours {} minutes".format(*target_time))
@@ -88,4 +89,4 @@ if __name__ == "__main__":
     key_dict = get_keyword_dict()
     tagged = get_tagged_time(acts, key_dict)
     print_overtime(tagged)
-
+    # print(tagged)

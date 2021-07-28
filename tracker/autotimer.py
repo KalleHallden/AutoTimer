@@ -1,12 +1,13 @@
 import time
 import subprocess
 import re
-
+import socket
 from datetime import datetime
+
+from target import Target, form
 from activity import *
+from listener import read_events
 
-
-form = '%Y-%m-%d'
 path = 'log/'
 
 
@@ -37,9 +38,16 @@ if __name__ == "__main__":
     filename = path + 'log_' + today + '.json'
     al = ActivityList(filename=filename)
 
+    # s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+    # s.connect("/var/run/acpid.socket")
+    # print("Connected to acpid")
+
     try:
         while True:
             time.sleep(1)
+            # message = read_events(s.recv(4096))
+            # if message:
+            #     print(message)
 
             new_window = get_active_window()
             if active_window == new_window:
@@ -56,3 +64,4 @@ if __name__ == "__main__":
 
     except KeyboardInterrupt:
         al.write(filename)
+        Target().write()

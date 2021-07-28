@@ -2,18 +2,9 @@ import os
 from collections import defaultdict
 from datetime import timedelta
 
-from target import Target
-from activity import ActivityList
-
-path = 'log/'
-
-
-# keywords for each tag
-tag_to_keys = {
-    'Programming': ['william', 'IPython', 'Source.gv', 'Stack Overflow', 'python', 'Python'],
-    'AGI book': ['book.lyx', 'book.pdf', 'Inkscape'],
-    'Thinking': ['thoughts_on_AGI.lyx'],
-}
+from config import path, tag_to_keys
+from tracker.target import Target
+from tracker.activity import ActivityList
 
 
 def collect_all_activities():
@@ -89,4 +80,3 @@ if __name__ == "__main__":
     key_dict = get_keyword_dict()
     tagged = get_tagged_time(acts, key_dict)
     print_overtime(tagged)
-    # print(tagged)

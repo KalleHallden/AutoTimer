@@ -2,9 +2,7 @@ import json
 from collections import defaultdict
 from datetime import timedelta, datetime
 
-start_date = datetime.strptime('2021-07-27', '%Y-%m-%d')
-target_file = 'target.json'
-form = '%Y-%m-%d'
+from config import target_file, start_date, form, default_target
 
 
 def date_range(start, end):
@@ -13,12 +11,6 @@ def date_range(start, end):
 
 
 class Target:
-    # target time in hours
-    default = {
-        'Programming': 4,
-        'AGI book': 1,
-        'Thoughts': 1,
-    }
 
     def __init__(self):
         self._data = {}
@@ -30,7 +22,7 @@ class Target:
             history = dict()
         for date in date_range(start_date, datetime.today() + timedelta(1)):
             date_str = date.strftime(form)
-            self._data[date_str] = history.get(date_str, self.default)
+            self._data[date_str] = history.get(date_str, default_target)
 
     def write(self):
         with open(target_file, 'w') as json_file:

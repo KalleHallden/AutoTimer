@@ -1,14 +1,13 @@
 import time
 import subprocess
 import re
-import socket
+# import socket
 from datetime import datetime
 
-from target import Target, form
-from activity import *
-from listener import read_events
-
-path = 'log/'
+from config import form, path
+from tracker.target import Target
+from tracker.activity import *
+# from tracker.listener import read_events
 
 
 def get_active_window():

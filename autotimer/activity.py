@@ -12,7 +12,6 @@ class ActivityList:
             with open(filename, 'r') as f:
                 data = json.load(f)
         except (FileNotFoundError, json.decoder.JSONDecodeError) as e:
-            print(e)
             return defaultdict(list)
         if not data:
             return defaultdict(list)

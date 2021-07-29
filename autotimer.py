@@ -5,9 +5,9 @@ import re
 from datetime import datetime
 
 from config import form, path
-from tracker.target import Target
-from tracker.activity import *
-# from tracker.listener import read_events
+from autotimer.target import Target
+from autotimer.activity import *
+# from autotimer.listener import read_events
 
 
 def get_active_window():

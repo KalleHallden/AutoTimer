@@ -3,8 +3,8 @@ from collections import defaultdict
 from datetime import timedelta, datetime
 
 from config import path, tag_to_keys
-from tracker.target import Target
-from tracker.activity import ActivityList
+from autotimer.target import Target
+from autotimer.activity import ActivityList
 
 
 def collect_all_activities():

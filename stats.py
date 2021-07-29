@@ -1,6 +1,6 @@
 import os
 from collections import defaultdict
-from datetime import timedelta
+from datetime import timedelta, datetime
 
 from config import path, tag_to_keys
 from tracker.target import Target
@@ -18,6 +18,18 @@ def collect_all_activities():
         al = ActivityList(filename=filename)
         al.append(activities)
     return activities
+
+
+def order_by_time(activities, date=None):
+    date = date or datetime.today()
+    times = []
+    for name, time_entries in activities.items():
+        for entry in time_entries:
+            s = entry.start_time
+            if s.day != date.day or s.month != date.month or s.year != date.year:
+                continue
+            times.append((s, entry.end_time, name))
+    return sorted(times, key=lambda x: x[0])
 
 
 def get_keyword_dict():

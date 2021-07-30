@@ -28,7 +28,7 @@ def order_by_time(activities, date=None):
             s = entry.start_time
             if s.day != date.day or s.month != date.month or s.year != date.year:
                 continue
-            times.append((s, entry, name))
+            times.append((s, entry.end_time, name))
     return sorted(times, key=lambda x: x[0])
 
 

@@ -3,8 +3,8 @@ import datetime
 from collections import namedtuple
 from random import randint
 
-from .stats import collect_all_activities, get_keyword_dict, get_tagged_time, order_by_time
-
+from .stats import collect_all_activities, get_keyword_dict, get_tagged_time, order_by_time, times_to_tag_times, \
+    get_overtimes
 
 Rectangle = namedtuple('Rectangle', 'x1 x2 activity color')
 
@@ -52,45 +52,66 @@ class Timeline:
 class Canvas(tk.Canvas):
     def __init__(self, master, times):
         self.master = master
-        super().__init__(master, width=1000, height=300)
+        super().__init__(master, width=1000, height=700)
         self.pack()
-        self.timeline = Timeline(50, 50, 950, 100, times)
-        self.create_rectangle(*self.timeline.as_tuple, outline="black")
-        self.create_timeline()
-        self.bind("<Motion>", self.moved)
-        self.activity = self.create_text(10, 10, text="", anchor="nw")
-        self.current_time = self.create_text(10, 30, text="", anchor="nw")
 
-    def create_timeline(self):
-        for rect in self.timeline.rectangles:
+        act_times, tag_times, tagged = times
+        self.act_timeline = Timeline(50, 100, 950, 150, act_times)
+        self.create_timeline(self.act_timeline)
+
+        self.tag_timeline = Timeline(50, 170, 950, 220, tag_times)
+        self.create_timeline(self.tag_timeline)
+
+        self.bind("<Motion>", self.moved)
+        self.act_text = self.create_text(10, 10, text="", anchor="nw")
+        self.tag_text = self.create_text(10, 30, text="", anchor="nw")
+        self.current_time = self.create_text(10, 50, text="", anchor="nw")
+
+        self.overtime(tagged)
+
+    def create_timeline(self, timeline):
+        self.create_rectangle(*timeline.as_tuple, outline="black")
+        for rect in timeline.rectangles:
             col = "#%02x%02x%02x" % rect.color
-            self.create_rectangle(rect.x1, self.timeline.y1 + 1, rect.x2, self.timeline.y2 - 1, fill=col, outline=col)
+            self.create_rectangle(rect.x1, timeline.y1 + 1, rect.x2, timeline.y2 - 1, fill=col, outline=col)
 
     def moved(self, event):
         time_text = ''
-        if self.timeline.x1 <= event.x <= self.timeline.x2 and self.timeline.y1 <= event.y <= self.timeline.y2:
-            time_text = self.timeline.x_to_time(event.x)
+        ys = [(self.act_timeline.y1, self.act_timeline.y2), (self.tag_timeline.y1, self.tag_timeline.y2)]
+        if self.act_timeline.x1 <= event.x < self.act_timeline.x2 and \
+                (ys[0][0] <= event.y <= ys[0][1] or ys[1][0] <= event.y <= ys[1][1]):
+            time_text = self.act_timeline.x_to_time(event.x)
         self.itemconfigure(self.current_time, text=time_text)
 
-        for rect in self.timeline.rectangles:
-            if rect.x1 <= event.x <= rect.x2 and self.timeline.y1 <= event.y <= self.timeline.y2:
-                self.itemconfigure(self.activity, text=rect.activity)
+        self.move_check(event, self.act_timeline, self.act_text, ys)
+        self.move_check(event, self.tag_timeline, self.tag_text, ys)
+
+    def move_check(self, event, timeline, text_label, ys):
+        for rect in timeline.rectangles:
+            if rect.x1 <= event.x < rect.x2 and (ys[0][0] <= event.y <= ys[0][1] or ys[1][0] <= event.y <= ys[1][1]):
+                self.itemconfigure(text_label, text=rect.activity)
                 return
-        self.itemconfigure(self.activity, text='Untracked')
+        if timeline.x1 <= event.x < timeline.x2 and (ys[0][0] <= event.y <= ys[0][1] or ys[1][0] <= event.y <= ys[1][1]):
+            self.itemconfigure(text_label, text='Untracked')
+        else:
+            self.itemconfigure(text_label, text='')
+
+    def overtime(self, tagged):
+        y = 250
+        for k, (tag, total_time, target_time, overtime) in enumerate(get_overtimes(tagged)):
+            self.create_text(10, y, text="Activity: {}".format(tag), anchor="nw")
+            self.create_text(10, y + 20, text="Total time:  {} hours, {} minutes".format(*total_time), anchor="nw")
+            if target_time is None:
+                y += 60
+                continue
+            self.create_text(10, y + 40, text="Target time: {} hours {} minutes".format(*target_time), anchor="nw")
+            self.create_text(10, y + 60, text="Overtime:    {} hours {} minutes".format(*overtime), anchor="nw")
+            y += 100
 
 
 class TimerGUI(tk.Tk):
     def __init__(self, times):
         super().__init__()
-        self.geometry("1000x300")
+        self.geometry("1000x700")
         self.title('Statistics and stuff')
         self._frame = Canvas(self, times)
-
-
-def get_times():
-    acts = collect_all_activities()
-    times = order_by_time(acts, date=None)
-    return times
-    # key_dict = get_keyword_dict()
-    # tagged = get_tagged_time(acts, key_dict)
-    # print_overtime(tagged)

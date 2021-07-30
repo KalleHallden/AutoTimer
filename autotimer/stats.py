@@ -3,8 +3,8 @@ from collections import defaultdict
 from datetime import timedelta, datetime
 
 from config import path, tag_to_keys
-from autotimer.target import Target
-from autotimer.activity import ActivityList
+from .target import Target
+from .activity import ActivityList
 
 
 def collect_all_activities():
@@ -28,7 +28,7 @@ def order_by_time(activities, date=None):
             s = entry.start_time
             if s.day != date.day or s.month != date.month or s.year != date.year:
                 continue
-            times.append((s, entry.end_time, name))
+            times.append((s, entry, name))
     return sorted(times, key=lambda x: x[0])
 
 
@@ -87,8 +87,8 @@ def print_overtime(tagged_time):
         print("Overtime:    {} hours {} minutes".format(*overtime))
 
 
-if __name__ == "__main__":
-    acts = collect_all_activities()
-    key_dict = get_keyword_dict()
-    tagged = get_tagged_time(acts, key_dict)
-    print_overtime(tagged)
+# if __name__ == "__main__":
+#     acts = collect_all_activities()
+#     key_dict = get_keyword_dict()
+#     tagged = get_tagged_time(acts, key_dict)
+#     print_overtime(tagged)

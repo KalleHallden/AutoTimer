@@ -25,12 +25,12 @@ def get_active_window():
 
     match = re.match(b"WM_NAME\(\w+\) = (?P<name>.+)$", stdout)
     if match is not None:
-        return match.group("name").strip(b'"').decode('UTF-8')
+        return match.group("name").strip(b'"').decode('UTF-8').replace('*', '')
     return None
 
 
 if __name__ == "__main__":
-    active_window = get_active_window()
+    old_window = get_active_window()
     start_time = datetime.now()
 
     today = datetime.today().strftime(form)
@@ -49,17 +49,16 @@ if __name__ == "__main__":
             #     print(message)
 
             new_window = get_active_window()
-            if active_window == new_window:
+            if old_window == new_window:
                 continue
-            print(active_window)
-            active_window = new_window
+            print(old_window)
 
             end_time = datetime.now()
             time_entry = TimeEntry(start_time, end_time, 0, 0, 0, 0, specific=True)
-
-            al.acts[active_window].append(time_entry)
+            al.acts[old_window].append(time_entry)
             al.write(filename)
-            start_time = datetime.now()
+            start_time = end_time
+            old_window = new_window
 
     except KeyboardInterrupt:
         al.write(filename)

@@ -95,9 +95,7 @@ def get_overtimes(tagged_time):
     target = Target()
     goal = target.sum_by_tag()
     for tag, sum_time in tagged_time.items():
-        # print("\nActivity: {}".format(tag))
         total_time = _hours_minutes(sum_time.seconds)
-        # print("Total time:  {} hours, {} minutes".format(*total_time))
         if tag not in goal:
             yield tag, total_time, None, None
             continue
@@ -106,8 +104,6 @@ def get_overtimes(tagged_time):
         target_time = _hours_minutes(target_seconds)
         overtime = _hours_minutes(sum_time.seconds - target_seconds)
         yield tag, total_time, target_time, overtime
-        # print("Target time: {} hours {} minutes".format(*target_time))
-        # print("Overtime:    {} hours {} minutes".format(*overtime))
 
 
 def get_stats():

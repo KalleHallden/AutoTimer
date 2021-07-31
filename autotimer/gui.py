@@ -1,10 +1,9 @@
 import tkinter as tk
 import datetime
 from collections import namedtuple
-from random import randint
+from hashlib import sha1, sha256
 
-from .stats import collect_all_activities, get_keyword_dict, get_tagged_time, order_by_time, times_to_tag_times, \
-    get_overtimes
+from .stats import get_overtimes
 
 Rectangle = namedtuple('Rectangle', 'x1 x2 activity color')
 
@@ -34,13 +33,21 @@ class Timeline:
         seconds = seconds % 60
         return datetime.time(hour=hour, minute=minute, second=seconds).strftime('%H:%M:%S')
 
+    @staticmethod
+    def string_to_color(name):
+        # r = 0, 255
+        # color = "#%02x%02x%02x" % (randint(*r), randint(*r), randint(*r))
+        bytes_name = bytes(str(name), 'utf-8')
+        hex_hash = sha256(bytes_name).hexdigest()
+        return '#' + hex_hash[:6]
+
     def times_to_rectangles(self, times):
         entries = []
         colors = dict()
+
         for time in times:
             activity = time[2]
-            r = 0, 255
-            colors[activity] = colors.get(activity, (randint(*r), randint(*r), randint(*r)))
+            colors[activity] = colors.get(activity, self.string_to_color(activity))
             rect = Rectangle(x1=self.time_to_x(time[0]),
                              x2=self.time_to_x(time[1]),
                              activity=activity,
@@ -57,10 +64,10 @@ class Canvas(tk.Canvas):
 
         act_times, tag_times, tagged = times
         self.act_timeline = Timeline(50, 100, 950, 150, act_times)
-        self.create_timeline(self.act_timeline)
+        self.create_timeline(self.act_timeline, ticks=False)
 
         self.tag_timeline = Timeline(50, 170, 950, 220, tag_times)
-        self.create_timeline(self.tag_timeline)
+        self.create_timeline(self.tag_timeline, ticks=True)
 
         self.bind("<Motion>", self.moved)
         self.act_text = self.create_text(10, 10, text="", anchor="nw")
@@ -69,11 +76,16 @@ class Canvas(tk.Canvas):
 
         self.overtime(tagged)
 
-    def create_timeline(self, timeline):
+    def create_timeline(self, timeline, ticks=False):
         self.create_rectangle(*timeline.as_tuple, outline="black")
         for rect in timeline.rectangles:
-            col = "#%02x%02x%02x" % rect.color
-            self.create_rectangle(rect.x1, timeline.y1 + 1, rect.x2, timeline.y2 - 1, fill=col, outline=col)
+            self.create_rectangle(rect.x1, timeline.y1 + 1, rect.x2, timeline.y2 - 1, fill=rect.color, outline=rect.color)
+        if not ticks:
+            return
+        for n in range(25):
+            x = timeline.x1 + n * (timeline.x2 - timeline.x1) / 24
+            self.create_line(x, timeline.y2, x, timeline.y2 + 4)
+            self.create_text(x - 4, timeline.y2 + 4, font=('Arial', 6), text=str(n).zfill(2), anchor="nw")
 
     def moved(self, event):
         time_text = ''
@@ -113,5 +125,5 @@ class TimerGUI(tk.Tk):
     def __init__(self, times):
         super().__init__()
         self.geometry("1000x700")
-        self.title('Statistics and stuff')
+        self.title('Autotimer statistics')
         self._frame = Canvas(self, times)

@@ -6,7 +6,7 @@ from datetime import datetime
 
 from config import form, path
 from autotimer.target import Target
-from autotimer.activity import *
+from autotimer.activity import ActivityList, TimeEntry
 # from autotimer.listener import read_events
 
 

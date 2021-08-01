@@ -13,7 +13,8 @@ start_date = datetime.strptime('2021-07-27', '%Y-%m-%d')
 tag_to_keys = {
     'Programming': ['william', 'IPython', 'Source.gv', 'Stack Overflow', 'python', 'Python', 'dataschool',
                     'Stack Exchange', 'GitHub', 'github', 'fish', 'autotimer', 'Autotimer'],
-    'Book': ['book.lyx', 'book.pdf', 'Inkscape', 'Ayoa', 'Thoughts on Artificial General Intelligence', 'latex'],
+    'Book': ['book.lyx', 'book.pdf', 'Inkscape', 'Ayoa', 'Thoughts on Artificial General Intelligence', 'latex',
+             'Figure'],
     'Thinking': ['thoughts_on_AGI', 'Gedanken'],
 }
 

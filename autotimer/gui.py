@@ -1,9 +1,11 @@
-import tkinter as tk
 import datetime
-from collections import namedtuple
-from hashlib import sha1, sha256
+import tkinter as tk
 
-from .stats import get_overtimes
+from tkinter import ttk
+from collections import namedtuple
+from hashlib import sha256
+
+from .stats import get_overtimes, get_stats
 
 Rectangle = namedtuple('Rectangle', 'x1 x2 activity color')
 
@@ -35,8 +37,6 @@ class Timeline:
 
     @staticmethod
     def string_to_color(name):
-        # r = 0, 255
-        # color = "#%02x%02x%02x" % (randint(*r), randint(*r), randint(*r))
         bytes_name = bytes(str(name), 'utf-8')
         hex_hash = sha256(bytes_name).hexdigest()
         return '#' + hex_hash[:6]
@@ -57,23 +57,26 @@ class Timeline:
 
 
 class Canvas(tk.Canvas):
-    def __init__(self, master, times):
+    def __init__(self, master):
         self.master = master
         super().__init__(master, width=1000, height=700)
         self.pack()
-
-        act_times, tag_times, tagged = times
-        self.act_timeline = Timeline(50, 100, 950, 150, act_times)
-        self.create_timeline(self.act_timeline, ticks=False)
-
-        self.tag_timeline = Timeline(50, 170, 950, 220, tag_times)
-        self.create_timeline(self.tag_timeline, ticks=True)
 
         self.bind("<Motion>", self.moved)
         self.act_text = self.create_text(10, 10, text="", anchor="nw")
         self.tag_text = self.create_text(10, 30, text="", anchor="nw")
         self.current_time = self.create_text(10, 50, text="", anchor="nw")
 
+        self.act_timeline = self.tag_timeline = None
+        self.load()
+
+    def load(self):
+        print('Loading...')
+        act_times, tag_times, tagged = get_stats()
+        self.act_timeline = Timeline(50, 100, 950, 150, act_times)
+        self.tag_timeline = Timeline(50, 170, 950, 220, tag_times)
+        self.create_timeline(self.act_timeline, ticks=False)
+        self.create_timeline(self.tag_timeline, ticks=True)
         self.overtime(tagged)
 
     def create_timeline(self, timeline, ticks=False):
@@ -109,7 +112,7 @@ class Canvas(tk.Canvas):
             self.itemconfigure(text_label, text='')
 
     def overtime(self, tagged):
-        y = 250
+        y = 300
         for k, (tag, total_time, target_time, overtime) in enumerate(get_overtimes(tagged)):
             self.create_text(10, y, text="Activity: {}".format(tag), anchor="nw")
             self.create_text(10, y + 20, text="Total time:  {} hours, {} minutes".format(*total_time), anchor="nw")
@@ -122,8 +125,11 @@ class Canvas(tk.Canvas):
 
 
 class TimerGUI(tk.Tk):
-    def __init__(self, times):
+    def __init__(self):
         super().__init__()
-        self.geometry("1000x700")
+        self.geometry("1000x800")
         self.title('Autotimer statistics')
-        self._frame = Canvas(self, times)
+        self._frame = Canvas(self)
+        self.reload_button = tk.Button(self, text="reload", command=self._frame.load)
+        self.reload_button.pack()
+

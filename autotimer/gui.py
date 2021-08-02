@@ -1,11 +1,12 @@
-import datetime
 import tkinter as tk
 
 from tkinter import ttk
+from datetime import time, datetime
 from collections import namedtuple
 from hashlib import sha256
 
-from .stats import get_overtimes, get_stats
+from config import form
+from .stats import get_overtimes, TimerStats, logged_dates
 
 Rectangle = namedtuple('Rectangle', 'x1 x2 activity color')
 
@@ -33,7 +34,7 @@ class Timeline:
         seconds = seconds % 3600
         minute = seconds // 60
         seconds = seconds % 60
-        return datetime.time(hour=hour, minute=minute, second=seconds).strftime('%H:%M:%S')
+        return time(hour=hour, minute=minute, second=seconds).strftime('%H:%M:%S')
 
     @staticmethod
     def string_to_color(name):
@@ -45,11 +46,11 @@ class Timeline:
         entries = []
         colors = dict()
 
-        for time in times:
-            activity = time[2]
+        for t in times:
+            activity = t[2]
             colors[activity] = colors.get(activity, self.string_to_color(activity))
-            rect = Rectangle(x1=self.time_to_x(time[0]),
-                             x2=self.time_to_x(time[1]),
+            rect = Rectangle(x1=self.time_to_x(t[0]),
+                             x2=self.time_to_x(t[1]),
                              activity=activity,
                              color=colors[activity])
             entries.append(rect)
@@ -63,21 +64,24 @@ class Canvas(tk.Canvas):
         self.pack()
 
         self.bind("<Motion>", self.moved)
+
+        self.act_text, self.tag_text, self.current_time = None, None, None
+        self.act_timeline = self.tag_timeline = None
+        today = datetime.today().strftime(form)
+        self.load(today)
+
+    def load(self, date_str):
+        self.delete('all')
         self.act_text = self.create_text(10, 10, text="", anchor="nw")
         self.tag_text = self.create_text(10, 30, text="", anchor="nw")
         self.current_time = self.create_text(10, 50, text="", anchor="nw")
 
-        self.act_timeline = self.tag_timeline = None
-        self.load()
-
-    def load(self):
-        print('Loading...')
-        act_times, tag_times, tagged = get_stats()
+        act_times, tag_times = self.master.timer_stats.timeline_stats(date_str)
         self.act_timeline = Timeline(50, 100, 950, 150, act_times)
         self.tag_timeline = Timeline(50, 170, 950, 220, tag_times)
         self.create_timeline(self.act_timeline, ticks=False)
         self.create_timeline(self.tag_timeline, ticks=True)
-        self.overtime(tagged)
+        # self.overtime(tagged)
 
     def create_timeline(self, timeline, ticks=False):
         self.create_rectangle(*timeline.as_tuple, outline="black")
@@ -129,7 +133,26 @@ class TimerGUI(tk.Tk):
         super().__init__()
         self.geometry("1000x800")
         self.title('Autotimer statistics')
-        self._frame = Canvas(self)
-        self.reload_button = tk.Button(self, text="reload", command=self._frame.load)
-        self.reload_button.pack()
 
+        self.timer_stats = TimerStats()
+        self.day_sel = None
+        self.day_selector()
+
+        self._frame = Canvas(self)
+
+    def day_selector(self):
+        label = ttk.Label(text="Select a day:")
+        label.pack(fill='x', padx=5, pady=5)
+
+        # create a combobox
+        selected_day = tk.StringVar()
+
+        self.day_sel = ttk.Combobox(self, textvariable=selected_day)
+        self.day_sel['values'] = sorted([day for _, day in logged_dates()])[::-1]
+        self.day_sel['state'] = 'readonly'  # normal
+        self.day_sel.pack(fill='x', padx=5, pady=5)
+
+        self.day_sel.bind('<<ComboboxSelected>>', self.day_changed)
+
+    def day_changed(self, event):
+        self._frame.load(self.day_sel.get())

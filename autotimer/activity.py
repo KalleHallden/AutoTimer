@@ -1,15 +1,17 @@
 import json
 from collections import defaultdict
+from datetime import datetime
 from dateutil import parser
 
 
 class ActivityList:
     def __init__(self, filename=None):
-        self.acts = defaultdict(list) if filename is None else self.load(filename)
+        self.filename = filename
+        self.acts = defaultdict(list) if filename is None else self.load()
 
-    def load(self, filename):
+    def load(self):
         try:
-            with open(filename, 'r') as f:
+            with open(self.filename, 'r') as f:
                 data = json.load(f)
         except (FileNotFoundError, json.decoder.JSONDecodeError) as e:
             return defaultdict(list)
@@ -21,8 +23,8 @@ class ActivityList:
             acts[activity['name']].extend(time_entries)
         return acts
 
-    def write(self, filename):
-        with open(filename, 'w') as json_file:
+    def write(self):
+        with open(self.filename, 'w') as json_file:
             json.dump(self.serialize(), json_file, indent=4, sort_keys=True)
 
     @staticmethod
@@ -51,6 +53,15 @@ class ActivityList:
     def append(self, acts):
         for name, time_entries in self.acts.items():
             acts[name].extend(time_entries)
+
+    def end_activity(self, start_time, activity):
+        end_time = datetime.now()
+        # print(start_time)
+        # print(end_time)
+        time_entry = TimeEntry(start_time, end_time, 0, 0, 0, 0, specific=True)
+        self.acts[activity].append(time_entry)
+        self.write()
+        return end_time
 
 
 class TimeEntry:

@@ -1,13 +1,12 @@
 import time
 import subprocess
 import re
-# import socket
 from datetime import datetime
 
 from config import form, path
 from autotimer.target import Target
-from autotimer.activity import ActivityList, TimeEntry
-# from autotimer.listener import read_events
+from autotimer.activity import ActivityList
+from autotimer.listener import PowerListener
 
 
 def get_active_window():
@@ -30,36 +29,31 @@ def get_active_window():
 
 
 if __name__ == "__main__":
-    old_window = get_active_window()
-    start_time = datetime.now()
+    power = PowerListener()
 
     today = datetime.today().strftime(form)
-    filename = path + 'log_' + today + '.json'
-    al = ActivityList(filename=filename)
+    al = ActivityList(filename=path + 'log_' + today + '.json')
 
-    # s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
-    # s.connect("/var/run/acpid.socket")
-    # print("Connected to acpid")
-
+    old_window = get_active_window()
+    start_time = datetime.now()
     try:
         while True:
             time.sleep(1)
-            # message = read_events(s.recv(4096))
-            # if message:
-            #     print(message)
+            if power.suspended_or_lid_closed():
+                al.end_activity(start_time, old_window)
+                power.wait()  # wait until lid opened or wakes up
+                old_window = new_window = get_active_window()
+                start_time = datetime.now()
+                print("Restart at: {}".format(start_time))
 
             new_window = get_active_window()
             if old_window == new_window:
                 continue
             print(old_window)
 
-            end_time = datetime.now()
-            time_entry = TimeEntry(start_time, end_time, 0, 0, 0, 0, specific=True)
-            al.acts[old_window].append(time_entry)
-            al.write(filename)
+            end_time = al.end_activity(start_time, old_window)
             start_time = end_time
             old_window = new_window
-
     except KeyboardInterrupt:
-        al.write(filename)
+        al.write()
         Target().write()

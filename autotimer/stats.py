@@ -12,7 +12,7 @@ def collect_all_activities():
     activities = defaultdict(list)
     for files in os.listdir(path):
         filename = os.path.join(path, files)
-        if not os.path.isfile(filename):
+        if not os.path.isfile(filename) or files[:4] != 'log_':
             continue
         print('Reading: {}'.format(filename))
         al = ActivityList(filename=filename)

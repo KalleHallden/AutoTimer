@@ -8,21 +8,13 @@ from .activity import ActivityList
 
 
 def logged_dates():
+    data = []
     for files in os.listdir(path):
         filename = os.path.join(path, files)
         if not os.path.isfile(filename) or files[:4] != 'log_':
             continue
-        yield filename, files[4:-5]
-
-
-def collect_all_activities():
-    """Collect activities from every day."""
-    activities = defaultdict(list)
-    for filename, _ in logged_dates():
-        print('Reading: {}'.format(filename))
-        al = ActivityList(filename=filename)
-        al.append(activities)
-    return activities
+        data.append((filename, files[4:-5]))
+    return sorted(data, key=lambda i: i[1])
 
 
 class TimerStats:
@@ -39,11 +31,16 @@ class TimerStats:
                 inv_keys[key] = tag
         return inv_keys
 
-    def order_by_time(self, date_str):
+    def activities_by_date(self, date_str):
         if date_str not in self.acts or date_str == datetime.today().strftime(form):
+            print('Reading date: {}'.format(date_str))
             self.acts[date_str] = ActivityList(filename=path + 'log_' + date_str + '.json')
+        return self.acts[date_str].acts
+
+    def order_by_time(self, date_str):
         times = []
-        for name, time_entries in self.acts[date_str].acts.items():
+        activities = self.activities_by_date(date_str)
+        for name, time_entries in activities.items():
             for entry in time_entries:
                 s = entry.start_time
                 if s.strftime(form) != date_str or entry.end_time.strftime(form) != date_str:
@@ -77,11 +74,13 @@ class TimerStats:
         else:
             return 'other'
 
-    def get_tagged_time(self, activities):
+    def get_tagged_time(self):
         tag_time = defaultdict(lambda: timedelta(0))
-        for name, time_entries in activities.items():
-            tag = self.activity_to_tag(name)
-            tag_time[tag] += self.sum_time_entries(time_entries)
+        for _, date_str in logged_dates():
+            activities = self.activities_by_date(date_str)
+            for name, time_entries in activities.items():
+                tag = self.activity_to_tag(name)
+                tag_time[tag] += self.sum_time_entries(time_entries)
         return tag_time
 
     @staticmethod
@@ -92,31 +91,18 @@ class TimerStats:
         return t
 
     def timeline_stats(self, date):
-        # acts = collect_all_activities()
         times = self.order_by_time(date)
         tag_times = self.times_to_tag_times(times)
-        # tagged = get_tagged_time(acts)
         return times, tag_times
 
+    def get_overtimes(self):
+        tagged_time = self.get_tagged_time()
+        target = Target()
+        goal = target.sum_by_tag()
+        for tag, total_time in tagged_time.items():
+            if tag not in goal:
+                yield tag, total_time, None
+                continue
 
-def sign(x):
-    return -1 if x < 0 else +1
-
-
-def _hours_minutes(secs):
-    return int(secs / 3600), sign(secs) * ((abs(secs) % 3600) // 60)
-
-
-def get_overtimes(tagged_time):
-    target = Target()
-    goal = target.sum_by_tag()
-    for tag, sum_time in tagged_time.items():
-        total_time = _hours_minutes(sum_time.seconds)
-        if tag not in goal:
-            yield tag, total_time, None, None
-            continue
-
-        target_seconds = goal[tag] * 3600
-        target_time = _hours_minutes(target_seconds)
-        overtime = _hours_minutes(sum_time.seconds - target_seconds)
-        yield tag, total_time, target_time, overtime
+            target_time = timedelta(hours=goal[tag])
+            yield tag, total_time, target_time

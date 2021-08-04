@@ -22,6 +22,7 @@ class TimerStats:
     def __init__(self):
         self.acts = dict()
         self.keyword_dict = self.get_keyword_dict()
+        self.target = Target()
 
     @staticmethod
     def get_keyword_dict():
@@ -33,7 +34,7 @@ class TimerStats:
 
     def activities_by_date(self, date_str):
         if date_str not in self.acts or date_str == datetime.today().strftime(form):
-            print('Reading date: {}'.format(date_str))
+            # print('Reading date: {}'.format(date_str))
             self.acts[date_str] = ActivityList(filename=path + 'log_' + date_str + '.json')
         return self.acts[date_str].acts
 
@@ -65,6 +66,11 @@ class TimerStats:
         tag_times.append((tag_start, tag_end, current_tag))
         return tag_times
 
+    def timeline_stats(self, date):
+        times = self.order_by_time(date)
+        tag_times = self.times_to_tag_times(times)
+        return times, tag_times
+
     def activity_to_tag(self, activity):
         keys = list(self.keyword_dict.keys())
         for key in keys:
@@ -74,14 +80,13 @@ class TimerStats:
         else:
             return 'other'
 
-    def get_tagged_time(self):
-        tag_time = defaultdict(lambda: timedelta(0))
-        for _, date_str in logged_dates():
-            activities = self.activities_by_date(date_str)
-            for name, time_entries in activities.items():
-                tag = self.activity_to_tag(name)
-                tag_time[tag] += self.sum_time_entries(time_entries)
-        return tag_time
+    def time_per_tag(self, date_str):
+        activities = self.activities_by_date(date_str)
+        tpt = defaultdict(lambda: timedelta(0))
+        for name, time_entries in activities.items():
+            tag = self.activity_to_tag(name)
+            tpt[tag] += self.sum_time_entries(time_entries)
+        return tpt
 
     @staticmethod
     def sum_time_entries(time_entries):
@@ -90,19 +95,19 @@ class TimerStats:
             t += entry.total_time
         return t
 
-    def timeline_stats(self, date):
-        times = self.order_by_time(date)
-        tag_times = self.times_to_tag_times(times)
-        return times, tag_times
+    def update_target(self):
+        for date_str, record in self.target.items():
+            if not any(t is None for _, (_, t) in record.items()):
+                continue
+            print(date_str)
+            tpt = self.time_per_tag(date_str)
+            self.target.update(date_str, tpt)
 
     def get_overtimes(self):
-        tagged_time = self.get_tagged_time()
-        target = Target()
-        goal = target.sum_by_tag()
-        for tag, total_time in tagged_time.items():
-            if tag not in goal:
+        self.update_target()
+        tagged = self.target.sum_by_tag()
+        for tag, (target_time, total_time) in tagged.items():
+            if tag not in tagged:
                 yield tag, total_time, None
                 continue
-
-            target_time = timedelta(hours=goal[tag])
-            yield tag, total_time, target_time
+            yield tag, total_time, timedelta(hours=target_time)

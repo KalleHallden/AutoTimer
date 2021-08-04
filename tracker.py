@@ -4,7 +4,6 @@ import re
 from datetime import datetime
 
 from config import form, path
-from autotimer.target import Target
 from autotimer.activity import ActivityList
 from autotimer.listener import PowerListener
 
@@ -56,4 +55,3 @@ if __name__ == "__main__":
             old_window = new_window
     except KeyboardInterrupt:
         al.write()
-        Target().write()

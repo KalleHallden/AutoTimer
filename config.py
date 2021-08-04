@@ -23,7 +23,7 @@ target_file = 'target.json'
 
 # time you want to spend on those tasks (tags) every day (in hours)
 default_target = {
-    'Programming': 4,
-    'Book': 1,
-    'Thinking': 1,
+    'Programming': [4, None],
+    'Book': [1, None],
+    'Thinking': [1, None],
 }

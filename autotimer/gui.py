@@ -76,8 +76,8 @@ class Canvas(tk.Canvas):
         self.current_time = self.create_text(10, 70, text="", anchor="nw")
 
         act_times, tag_times = self.master.timer_stats.timeline_stats(date_str)
-        self.act_timeline = Timeline(10, 100, 1000, 150, act_times)
-        self.tag_timeline = Timeline(10, 170, 1000, 220, tag_times)
+        self.act_timeline = Timeline(10, 100, 990, 150, act_times)
+        self.tag_timeline = Timeline(10, 170, 990, 220, tag_times)
         self.create_timeline(self.act_timeline, ticks=False)
         self.create_timeline(self.tag_timeline, ticks=True)
 
@@ -90,7 +90,7 @@ class Canvas(tk.Canvas):
         for n in range(25):
             x = timeline.x1 + n * (timeline.x2 - timeline.x1) / 24
             self.create_line(x, timeline.y2, x, timeline.y2 + 4)
-            self.create_text(x - 4, timeline.y2 + 4, font=('Arial', 6), text=str(n).zfill(2), anchor="nw")
+            self.create_text(x - 5, timeline.y2 + 6, font=('Arial', 8), text=str(n).zfill(2), anchor="nw")
 
     def moved(self, event):
         time_text = ''
@@ -108,10 +108,7 @@ class Canvas(tk.Canvas):
             if rect.x1 <= event.x < rect.x2 and (ys[0][0] <= event.y <= ys[0][1] or ys[1][0] <= event.y <= ys[1][1]):
                 self.itemconfigure(text_label, text=rect.activity)
                 return
-        if timeline.x1 <= event.x < timeline.x2 and (ys[0][0] <= event.y <= ys[0][1] or ys[1][0] <= event.y <= ys[1][1]):
-            self.itemconfigure(text_label, text='Untracked')
-        else:
-            self.itemconfigure(text_label, text='')
+        self.itemconfigure(text_label, text='')
 
 
 class TimerGUI(tk.Tk):
@@ -130,6 +127,12 @@ class TimerGUI(tk.Tk):
         self.listbox = self.scrollbar = None
         self.overtime_listbox()
 
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.timer_stats.target.write()
+
     def day_selector(self):
         label = ttk.Label(text="Select a day:")
         label.grid(column=0, row=0, sticky='w')
@@ -146,6 +149,7 @@ class TimerGUI(tk.Tk):
 
     def day_changed(self, event):
         self._frame.load(self.day_sel.get())
+        self.overtime_listbox()
 
     def overtime_listbox(self):
         text = tk.StringVar(value=self.overtime())
@@ -166,13 +170,16 @@ class TimerGUI(tk.Tk):
             text.append("Activity: {}".format(tag))
             text.append("Total time:  {}".format(total_time))
             if target_time is None:
-                text.append("\n")
+                text.append("")
                 continue
             text.append("Target time: {}".format(target_time))
             overtime = total_time - target_time
             s = str(overtime) if overtime >= timedelta(0) else '- ' + str(target_time - total_time)
             text.append("Overtime:    {}".format(s))
-            text.append("\n")
+            text.append("")
         return text
 
 
+def run():
+    with TimerGUI() as root:
+        root.mainloop()

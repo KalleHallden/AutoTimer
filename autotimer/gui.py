@@ -174,7 +174,7 @@ class TimerGUI(tk.Tk):
                 continue
             text.append("Target time: {}".format(target_time))
             overtime = total_time - target_time
-            s = str(overtime) if overtime >= timedelta(0) else '- ' + str(target_time - total_time)
+            s = str(overtime) if overtime >= timedelta(0) else '-' + str(target_time - total_time)
             text.append("Overtime:    {}".format(s))
             text.append("")
         return text

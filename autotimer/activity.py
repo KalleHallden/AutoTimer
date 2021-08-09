@@ -54,14 +54,11 @@ class ActivityList:
         for name, time_entries in self.acts.items():
             acts[name].extend(time_entries)
 
-    def end_activity(self, start_time, activity):
-        end_time = datetime.now()
-        # print(start_time)
-        # print(end_time)
+    def end_activity(self, activity, start_time, end_time):
+        print("Enter activity: {}\nfrom: {}\nto:   {}\n".format(activity, start_time, end_time))
         time_entry = TimeEntry(start_time, end_time, 0, 0, 0, 0, specific=True)
         self.acts[activity].append(time_entry)
         self.write()
-        return end_time
 
 
 class TimeEntry:

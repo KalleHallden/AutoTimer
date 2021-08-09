@@ -2,7 +2,7 @@ import json
 from collections import defaultdict
 from datetime import timedelta, datetime
 
-from config import path, target_file, start_date, form, default_target
+from config import path, target_file, start_date, form, free_weekdays, workday_target, holiday_target
 
 
 def date_range(start, end):
@@ -29,8 +29,12 @@ class Target:
         end_date = end_date or datetime.today()
         for date in date_range(start_date, end_date):
             date_str = date.strftime(form)
-            self._data[date_str] = history.get(date_str, default_target)
-        self._data[end_date.strftime(form)] = default_target
+            self._data[date_str] = history.get(date_str, self.get_goal(date))
+        self._data[end_date.strftime(form)] = self.get_goal(end_date)
+
+    @staticmethod
+    def get_goal(date):
+        return holiday_target if date.weekday() in free_weekdays else workday_target
 
     def items(self):
         return self._data.items()

@@ -14,7 +14,8 @@ tag_to_keys = {
     'Programming': ['william', 'IPython', 'Source.gv', 'Stack Overflow', 'python', 'Python', 'dataschool',
                     'Stack Exchange', 'GitHub', 'github', 'fish', 'autotimer', 'Autotimer'],
     'Book': ['book.lyx', 'book.pdf', 'Inkscape', 'Ayoa', 'Thoughts on Artificial General Intelligence', 'latex',
-             'Figure'],
+             'Figure', 'Causal deconvolution', 'frai-2020', 'Zenil', 'algorithmic complexity', 'jphysparis',
+             'free-energy', 'aixi_approx', 'neco_a_00999.pdf'],
     'Thinking': ['thoughts_on_AGI', 'Gedanken'],
 }
 
@@ -22,8 +23,16 @@ tag_to_keys = {
 target_file = 'target.json'
 
 # time you want to spend on those tasks (tags) every day (in hours)
-default_target = {
+workday_target = {
     'Programming': [4, None],
     'Book': [1, None],
     'Thinking': [1, None],
+}
+
+free_weekdays = [5, 6]  # Saturday = 5, Sunday = 6
+
+holiday_target = {
+    'Programming': [0, None],
+    'Book': [0, None],
+    'Thinking': [0, None],
 }

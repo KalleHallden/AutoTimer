@@ -1,4 +1,5 @@
 import os
+import re
 from collections import defaultdict
 from datetime import timedelta, datetime
 
@@ -63,7 +64,8 @@ class TimerStats:
                 current_tag = tag
                 tag_start = start
             tag_end = end
-        tag_times.append((tag_start, tag_end, current_tag))
+        if len(times) > 0:
+            tag_times.append((tag_start, tag_end, current_tag))
         return tag_times
 
     def timeline_stats(self, date):
@@ -74,7 +76,7 @@ class TimerStats:
     def activity_to_tag(self, activity):
         keys = list(self.keyword_dict.keys())
         for key in keys:
-            if not isinstance(activity, str) or activity.find(key) < 0:
+            if not isinstance(activity, str) or re.search(key, activity, re.IGNORECASE) is None:
                 continue
             return self.keyword_dict[key]
         else:

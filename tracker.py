@@ -27,6 +27,12 @@ def get_active_window():
     return None
 
 
+def restart(current_time):
+    w = get_active_window()
+    print("Restart at: {}\n".format(current_time))
+    return w, w, current_time
+
+
 if __name__ == "__main__":
     power = PowerListener()
 
@@ -34,24 +40,31 @@ if __name__ == "__main__":
     al = ActivityList(filename=path + 'log_' + today + '.json')
 
     old_window = get_active_window()
-    start_time = datetime.now()
+    start_time = last_record = datetime.now()
     try:
         while True:
             time.sleep(1)
-            if power.suspended_or_lid_closed():
-                al.end_activity(start_time, old_window)
-                power.wait()  # wait until lid opened or wakes up
-                old_window = new_window = get_active_window()
-                start_time = datetime.now()
-                print("Restart at: {}".format(start_time))
+            now = datetime.now()
 
+            # computer was likely suspended
+            if (now - last_record).total_seconds() > 5:
+                print("\n*** waking up from suspension ***\n")
+                al.end_activity(old_window, start_time, last_record)
+                old_window, new_window, start_time = restart(now)
+
+            # laptop lid closed
+            if power.lid_closed():
+                al.end_activity(old_window, start_time, now)
+                power.wait()  # wait until lid opened or wakes up
+                now = datetime.now()
+                old_window, new_window, start_time = restart(now)
+
+            last_record = now
             new_window = get_active_window()
             if old_window == new_window:
                 continue
-            print(old_window)
-
-            end_time = al.end_activity(start_time, old_window)
-            start_time = end_time
+            al.end_activity(old_window, start_time, now)
+            start_time = now
             old_window = new_window
     except KeyboardInterrupt:
         al.write()

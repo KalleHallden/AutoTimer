@@ -30,17 +30,12 @@ class PowerListener:
                     return "Laptop lid opened"
                 elif event[2] == 'close':
                     return "Laptop lid closed"
-            # elif event[0][:4] == "jack":
-            #     if event[2] == 'unplug':
-            #         return "Suspended"
-            #     elif event[2] == 'plug':
-            #         return "Woke up from suspension"
         return ""
 
-    def suspended_or_lid_closed(self):
+    def lid_closed(self):
         message = self.read_events()
-        if message in ['Suspended', 'Laptop lid closed']:
-            print(message)
+        if message == 'Laptop lid closed':
+            print("\n*** {} ***\n".format(message))
             return True
         return False
 
@@ -49,8 +44,8 @@ class PowerListener:
         while True:
             time.sleep(1)
             message = self.read_events()
-            if message in ['Laptop lid opened', 'Plugged']:
-                print(message)
+            if message == 'Laptop lid opened':
+                print("\n*** {} ***\n".format(message))
                 return
 
 

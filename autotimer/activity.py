@@ -3,15 +3,21 @@ from collections import defaultdict
 from datetime import datetime
 from dateutil import parser
 
+from config import form, path
+
 
 class ActivityList:
-    def __init__(self, filename=None):
-        self.filename = filename
-        self.acts = defaultdict(list) if filename is None else self.load()
+    def __init__(self, date=None):
+        self._date = date or datetime.today()
+        self.acts = self.load()
+
+    @property
+    def _filename(self):
+        return path + 'log_' + self._date.strftime(form) + '.json'
 
     def load(self):
         try:
-            with open(self.filename, 'r') as f:
+            with open(self._filename, 'r') as f:
                 data = json.load(f)
         except (FileNotFoundError, json.decoder.JSONDecodeError) as e:
             return defaultdict(list)
@@ -24,7 +30,7 @@ class ActivityList:
         return acts
 
     def write(self):
-        with open(self.filename, 'w') as json_file:
+        with open(self._filename, 'w') as json_file:
             json.dump(self.serialize(), json_file, indent=4, sort_keys=True)
 
     @staticmethod
@@ -55,10 +61,15 @@ class ActivityList:
             acts[name].extend(time_entries)
 
     def end_activity(self, activity, start_time, end_time):
-        print("Enter activity: {}\nfrom: {}\nto:   {}\n".format(activity, start_time, end_time))
+        start, end = start_time.strftime('%H:%M:%S'), end_time.strftime('%H:%M:%S')
+        print("Enter activity: {}\nfrom: {}\nto:   {}\n".format(activity, start, end))
         time_entry = TimeEntry(start_time, end_time, 0, 0, 0, 0, specific=True)
         self.acts[activity].append(time_entry)
         self.write()
+        # next day has arrived
+        if end_time.day != self._date.day:
+            self._date = end_time
+            self.acts = defaultdict(list)
 
 
 class TimeEntry:

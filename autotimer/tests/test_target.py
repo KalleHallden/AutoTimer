@@ -5,7 +5,7 @@ from ..target import Target
 
 def test_sum_by_tag():
     end_date = datetime(year=2021, month=7, day=29)
-    t = Target(filename='test_target.json', end_date=end_date)
+    t = Target(end_date, filename='test_target.json')
     targ = t.sum_by_tag()
     expected = {'Book': [6, '1:09:23'],
                 'Programming': [12, '8:21:20'],

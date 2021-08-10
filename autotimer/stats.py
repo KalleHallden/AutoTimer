@@ -23,7 +23,8 @@ class TimerStats:
     def __init__(self):
         self.acts = dict()
         self.keyword_dict = self.get_keyword_dict()
-        self.target = Target()
+        self._date = datetime.today()
+        self.target = Target(self._date)
 
     @staticmethod
     def get_keyword_dict():
@@ -36,7 +37,7 @@ class TimerStats:
     def activities_by_date(self, date_str):
         if date_str not in self.acts or date_str == datetime.today().strftime(form):
             # print('Reading date: {}'.format(date_str))
-            self.acts[date_str] = ActivityList(filename=path + 'log_' + date_str + '.json')
+            self.acts[date_str] = ActivityList(date=datetime.strptime(date_str, form))
         return self.acts[date_str].acts
 
     def order_by_time(self, date_str):
@@ -97,16 +98,18 @@ class TimerStats:
             t += entry.total_time
         return t
 
-    def update_target(self):
-        for date_str, record in self.target.items():
-            if not any(t is None for _, (_, t) in record.items()):
-                continue
-            print(date_str)
-            tpt = self.time_per_tag(date_str)
-            self.target.update(date_str, tpt)
-
     def get_overtimes(self):
-        self.update_target()
+        today = datetime.today()
+        if today.day != self._date.day:
+            self._date = today
+            self.target.write()
+            self.target = Target(today)
+
+        date_str = self._date.strftime(form)
+        print("Loading data from {}".format(date_str))
+        tpt = self.time_per_tag(date_str)
+        self.target.update(date_str, tpt)
+
         tagged = self.target.sum_by_tag()
         for tag, (target_time, total_time) in tagged.items():
             if tag not in tagged:

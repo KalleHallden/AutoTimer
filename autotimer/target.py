@@ -17,7 +17,7 @@ def string_to_timedelta(s):
 
 class Target:
 
-    def __init__(self, filename=None, end_date=None):
+    def __init__(self, end_date, filename=None):
         self.filename = filename or target_file
         self._data = {}
         try:
@@ -26,11 +26,11 @@ class Target:
         except (FileNotFoundError, json.decoder.JSONDecodeError) as e:
             print(e)
             history = dict()
-        end_date = end_date or datetime.today()
-        for date in date_range(start_date, end_date):
+        self._end_date = end_date
+        for date in date_range(start_date, self._end_date):
             date_str = date.strftime(form)
             self._data[date_str] = history.get(date_str, self.get_goal(date))
-        self._data[end_date.strftime(form)] = self.get_goal(end_date)
+        self._data[self._end_date.strftime(form)] = self.get_goal(self._end_date)
 
     @staticmethod
     def get_goal(date):

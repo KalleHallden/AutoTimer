@@ -3,7 +3,6 @@ import subprocess
 import re
 from datetime import datetime
 
-from config import form, path
 from autotimer.activity import ActivityList
 from autotimer.listener import PowerListener
 
@@ -36,8 +35,7 @@ def restart(current_time):
 if __name__ == "__main__":
     power = PowerListener()
 
-    today = datetime.today().strftime(form)
-    al = ActivityList(filename=path + 'log_' + today + '.json')
+    al = ActivityList()
 
     old_window = get_active_window()
     start_time = last_record = datetime.now()

@@ -3,7 +3,7 @@ from collections import defaultdict
 from datetime import datetime
 from dateutil import parser
 
-from config import form, path
+from config import form, log_path
 
 
 class ActivityList:
@@ -13,13 +13,14 @@ class ActivityList:
 
     @property
     def _filename(self):
-        return path + 'log_' + self._date.strftime(form) + '.json'
+        return log_path + 'log_' + self._date.strftime(form) + '.json'
 
     def load(self):
         try:
             with open(self._filename, 'r') as f:
                 data = json.load(f)
         except (FileNotFoundError, json.decoder.JSONDecodeError) as e:
+            print(e)
             return defaultdict(list)
         if not data:
             return defaultdict(list)

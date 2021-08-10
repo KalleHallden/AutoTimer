@@ -2,7 +2,7 @@ import json
 from collections import defaultdict
 from datetime import timedelta, datetime
 
-from config import path, target_file, start_date, form, free_weekdays, workday_target, holiday_target
+from config import log_path, target_file, start_date, form, free_weekdays, workday_target, holiday_target
 
 
 def date_range(start, end):
@@ -21,7 +21,7 @@ class Target:
         self.filename = filename or target_file
         self._data = {}
         try:
-            with open(path + self.filename, 'r') as json_file:
+            with open(log_path + self.filename, 'r') as json_file:
                 history = json.load(json_file)
         except (FileNotFoundError, json.decoder.JSONDecodeError) as e:
             print(e)
@@ -40,7 +40,7 @@ class Target:
         return self._data.items()
 
     def write(self):
-        with open(path + self.filename, 'w') as json_file:
+        with open(log_path + self.filename, 'w') as json_file:
             json.dump(self._data, json_file, indent=4, sort_keys=True)
 
     def sum_by_tag(self):

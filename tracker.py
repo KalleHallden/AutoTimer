@@ -3,8 +3,8 @@ import subprocess
 import re
 from datetime import datetime
 
-from autotimer.activity import ActivityList
-from autotimer.listener import PowerListener
+from timenazi.activity import ActivityList
+from timenazi.listener import PowerListener
 
 
 def get_active_window():

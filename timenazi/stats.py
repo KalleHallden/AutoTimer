@@ -3,15 +3,15 @@ import re
 from collections import defaultdict
 from datetime import timedelta, datetime
 
-from config import path, tag_to_keys, form
+from config import log_path, tag_to_keys, form
 from .target import Target
 from .activity import ActivityList
 
 
 def logged_dates():
     data = []
-    for files in os.listdir(path):
-        filename = os.path.join(path, files)
+    for files in os.listdir(log_path):
+        filename = os.path.join(log_path, files)
         if not os.path.isfile(filename) or files[:4] != 'log_':
             continue
         data.append((filename, files[4:-5]))

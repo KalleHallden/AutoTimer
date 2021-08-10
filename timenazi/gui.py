@@ -5,7 +5,7 @@ from datetime import time, datetime, timedelta
 from collections import namedtuple
 from hashlib import sha256
 
-from config import form
+from config import form, path
 from .stats import TimerStats, logged_dates
 
 Rectangle = namedtuple('Rectangle', 'x1 x2 activity color')
@@ -115,7 +115,8 @@ class TimerGUI(tk.Tk):
     def __init__(self):
         super().__init__()
         self.geometry("1020x600")
-        self.title('Autotimer statistics')
+        self.title('TimeNazi')
+        self.iconphoto(False, tk.PhotoImage(file=path + "timenazi_icon.png"))
 
         self.timer_stats = TimerStats()
         self.day_sel = None

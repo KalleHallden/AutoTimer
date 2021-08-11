@@ -8,16 +8,6 @@ from .target import Target
 from .activity import ActivityList
 
 
-def logged_dates():
-    data = []
-    for files in os.listdir(log_path):
-        filename = os.path.join(log_path, files)
-        if not os.path.isfile(filename) or files[:4] != 'log_':
-            continue
-        data.append((filename, files[4:-5]))
-    return sorted(data, key=lambda i: i[1])
-
-
 class TimerStats:
 
     def __init__(self):
@@ -69,8 +59,8 @@ class TimerStats:
             tag_times.append((tag_start, tag_end, current_tag))
         return tag_times
 
-    def timeline_stats(self, date):
-        times = self.order_by_time(date)
+    def timeline_stats(self, date_str):
+        times = self.order_by_time(date_str)
         tag_times = self.times_to_tag_times(times)
         return times, tag_times
 

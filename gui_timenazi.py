@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
-from timenazi.gui import run
+from timenazi.gui import TimerGUI
 
-run()
+with TimerGUI() as root:
+    root.mainloop()

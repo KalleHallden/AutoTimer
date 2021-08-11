@@ -1,12 +1,13 @@
 import tkinter as tk
 
 from tkinter import ttk
+from tkcalendar import Calendar
 from datetime import time, datetime, timedelta
 from collections import namedtuple
 from hashlib import sha256
 
 from config import form, path
-from .stats import TimerStats, logged_dates
+from .stats import TimerStats
 
 Rectangle = namedtuple('Rectangle', 'x1 x2 activity color')
 
@@ -71,13 +72,13 @@ class Canvas(tk.Canvas):
 
     def load(self, date_str):
         self.delete('all')
-        self.act_text = self.create_text(10, 30, text="", anchor="nw")
-        self.tag_text = self.create_text(10, 50, text="", anchor="nw")
-        self.current_time = self.create_text(10, 70, text="", anchor="nw")
+        self.act_text = self.create_text(10, 200, text="", anchor="nw")
+        self.tag_text = self.create_text(10, 220, text="", anchor="nw")
+        self.current_time = self.create_text(10, 240, text="", anchor="nw")
 
         act_times, tag_times = self.master.timer_stats.timeline_stats(date_str)
-        self.act_timeline = Timeline(10, 100, 990, 150, act_times)
-        self.tag_timeline = Timeline(10, 170, 990, 220, tag_times)
+        self.act_timeline = Timeline(10, 30, 990, 80, act_times)
+        self.tag_timeline = Timeline(10, 100, 990, 150, tag_times)
         self.create_timeline(self.act_timeline, ticks=False)
         self.create_timeline(self.tag_timeline, ticks=True)
 
@@ -114,16 +115,15 @@ class Canvas(tk.Canvas):
 class TimerGUI(tk.Tk):
     def __init__(self):
         super().__init__()
-        self.geometry("1020x600")
-        self.title('TimeNazi')
+        self.geometry("1020x550")
+        self.title('My Little Time Nazi')
         self.iconphoto(False, tk.PhotoImage(file=path + "timenazi_icon.png"))
 
         self.timer_stats = TimerStats()
-        self.day_sel = None
-        self.day_selector()
+        self.date_selector()
 
         self._frame = Canvas(self)
-        self._frame.grid(column=0, row=3)
+        self._frame.grid(column=0, row=3, columnspan=5)
 
         self.listbox = self.scrollbar = None
         self.overtime_listbox()
@@ -134,34 +134,31 @@ class TimerGUI(tk.Tk):
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.timer_stats.target.write()
 
-    def day_selector(self):
-        label = ttk.Label(text="Select a day:")
-        label.grid(column=0, row=0, sticky='w')
+    def date_selector(self):
+        t = datetime.today()
+        cal = Calendar(self, selectmode="day", year=t.year, month=t.month, day=t.day)
+        cal.grid(column=0, row=1, sticky='s')
 
-        # create a combobox
-        selected_day = tk.StringVar()
+        # Define Function to select the date
+        def get_date():
+            date_str = datetime.strptime(cal.get_date(), '%m/%d/%y').strftime(form)
+            self._frame.load(date_str)
+            self.overtime_listbox()
 
-        self.day_sel = ttk.Combobox(self, textvariable=selected_day)
-        self.day_sel['values'] = sorted([day for _, day in logged_dates()])[::-1]
-        self.day_sel['state'] = 'readonly'  # normal
-        self.day_sel.grid(column=0, row=1, sticky='w')
-
-        self.day_sel.bind('<<ComboboxSelected>>', self.day_changed)
-
-    def day_changed(self, event):
-        self._frame.load(self.day_sel.get())
-        self.overtime_listbox()
+        # Create a button to pick the date from the calendar
+        button = tk.Button(text="Show tracked time", command=get_date)
+        button.grid(column=0, row=2, sticky='n')
 
     def overtime_listbox(self):
         text = tk.StringVar(value=self.overtime())
 
         self.listbox = tk.Listbox(self, listvariable=text, height=15, selectmode='extended')
-        self.listbox.grid(column=0, row=4, sticky='nwes')
+        self.listbox.grid(column=4, row=1, rowspan=2, sticky='nwes')
 
         # link a scrollbar to a list
         self.scrollbar = ttk.Scrollbar(self, orient='vertical', command=self.listbox.yview)
         self.listbox['yscrollcommand'] = self.scrollbar.set
-        self.scrollbar.grid(column=1, row=4, sticky='ns')
+        self.scrollbar.grid(column=5, row=1, rowspan=2, sticky='ns')
 
     def overtime(self):
         text = []
@@ -179,8 +176,3 @@ class TimerGUI(tk.Tk):
             text.append("Overtime:    {}".format(s))
             text.append("")
         return text
-
-
-def run():
-    with TimerGUI() as root:
-        root.mainloop()

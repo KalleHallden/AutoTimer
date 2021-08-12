@@ -14,7 +14,7 @@ start_date = datetime.strptime('2021-07-27', '%Y-%m-%d')
 # keywords for each tag
 tag_to_keys = {
     'Programming': ['william', 'IPython', 'Source.gv', 'Stack Overflow', 'python', 'Python', 'dataschool',
-                    'Stack Exchange', 'GitHub', 'github', 'fish', 'autotimer', 'Autotimer', 'TimeNazi'],
+                    'Stack Exchange', 'GitHub', 'github', 'fish', 'autotimer', 'Autotimer', 'TimeNazi', 'GIMP'],
     'Book': ['book.lyx', 'book.pdf', 'Inkscape', 'Ayoa', 'Thoughts on Artificial General Intelligence', 'latex',
              'Figure', 'Causal deconvolution', 'frai-2020', 'Zenil', 'algorithmic complexity', 'jphysparis',
              'free-energy', 'aixi_approx', 'neco_a_00999.pdf'],

@@ -1,6 +1,7 @@
 import tkinter as tk
 
 from tkinter import ttk
+from PIL import ImageTk, Image
 from tkcalendar import Calendar
 from datetime import time, datetime, timedelta
 from collections import namedtuple
@@ -61,7 +62,7 @@ class Timeline:
 class Canvas(tk.Canvas):
     def __init__(self, master):
         self.master = master
-        super().__init__(master, width=1000, height=270)
+        super().__init__(master, width=1000, height=270, bg='white', bd=0, highlightthickness=0)
 
         self.bind("<Motion>", self.moved)
 
@@ -115,15 +116,17 @@ class Canvas(tk.Canvas):
 class TimerGUI(tk.Tk):
     def __init__(self):
         super().__init__()
-        self.geometry("1020x550")
-        self.title('My Little Time Nazi')
-        self.iconphoto(False, tk.PhotoImage(file=path + "timenazi_icon.png"))
+        self.geometry("1020x500")
+        self.title('TimeNazi')
+        self.configure(bg='white')
+
+        self.set_icon()
 
         self.timer_stats = TimerStats()
         self.date_selector()
 
         self._frame = Canvas(self)
-        self._frame.grid(column=0, row=3, columnspan=5)
+        self._frame.grid(column=0, row=2, columnspan=5, sticky='s')
 
         self.listbox = self.scrollbar = None
         self.overtime_listbox()
@@ -134,10 +137,21 @@ class TimerGUI(tk.Tk):
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.timer_stats.target.write()
 
+    def set_icon(self):
+        icon = tk.PhotoImage(file=path + "timenazi_icon.png")
+        self.iconphoto(False, icon)
+
+    #     icon = Image.open(path + "timenazi_icon.png")
+    #     icon = icon.resize((50, 50), Image.ANTIALIAS)
+    #     img = ImageTk.PhotoImage(icon)
+    #     panel = tk.Label(image=img, bg="white")
+    #     panel.image = img
+    #     panel.grid(column=2, row=0, pady=10, sticky='n')
+
     def date_selector(self):
         t = datetime.today()
         cal = Calendar(self, selectmode="day", year=t.year, month=t.month, day=t.day)
-        cal.grid(column=0, row=1, sticky='s')
+        cal.grid(column=0, row=0, padx=30, sticky='s')
 
         # Define Function to select the date
         def get_date():
@@ -147,32 +161,30 @@ class TimerGUI(tk.Tk):
 
         # Create a button to pick the date from the calendar
         button = tk.Button(text="Show tracked time", command=get_date)
-        button.grid(column=0, row=2, sticky='n')
+        button.grid(column=0, row=1, sticky='n')
 
     def overtime_listbox(self):
         text = tk.StringVar(value=self.overtime())
 
-        self.listbox = tk.Listbox(self, listvariable=text, height=15, selectmode='extended')
-        self.listbox.grid(column=4, row=1, rowspan=2, sticky='nwes')
+        self.listbox = tk.Listbox(self, listvariable=text, height=11, selectmode='extended')
+        self.listbox.grid(column=4, row=0, rowspan=2, padx=30, pady=10, sticky='nsew')
 
         # link a scrollbar to a list
-        self.scrollbar = ttk.Scrollbar(self, orient='vertical', command=self.listbox.yview)
-        self.listbox['yscrollcommand'] = self.scrollbar.set
-        self.scrollbar.grid(column=5, row=1, rowspan=2, sticky='ns')
+        # self.scrollbar = ttk.Scrollbar(self, orient='vertical', command=self.listbox.yview)
+        # self.listbox['yscrollcommand'] = self.scrollbar.set
+        # self.scrollbar.grid(column=5, row=1, rowspan=2, sticky='nsew')
 
     def overtime(self):
         text = []
-        for k, (tag, total_time, target_time) in enumerate(self.timer_stats.get_overtimes()):
+        for k, (tag, total_time, overtime) in enumerate(self.timer_stats.get_overtimes()):
             if tag == "other":
                 continue
-            text.append("Activity: {}".format(tag))
-            text.append("Total time:  {}".format(total_time))
-            if target_time is None:
+            if k > 0:
+                text.append("")
+            text.append(tag)
+            text.append("Total time:  {:.2f} hours".format(total_time))
+            if overtime is None:
                 text.append("")
                 continue
-            text.append("Target time: {}".format(target_time))
-            overtime = total_time - target_time
-            s = str(overtime) if overtime >= timedelta(0) else '-' + str(target_time - total_time)
-            text.append("Overtime:    {}".format(s))
-            text.append("")
+            text.append("Overtime:    {:.2f} hours".format(overtime))
         return text

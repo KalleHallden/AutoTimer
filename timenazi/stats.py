@@ -102,7 +102,12 @@ class TimerStats:
 
         tagged = self.target.sum_by_tag()
         for tag, (target_time, total_time) in tagged.items():
+            total_time = total_time.total_seconds() / 3600.
             if tag not in tagged:
                 yield tag, total_time, None
                 continue
-            yield tag, total_time, timedelta(hours=target_time)
+            if target_time is None:
+                overtime = None
+            else:
+                overtime = total_time - target_time
+            yield tag, total_time, overtime

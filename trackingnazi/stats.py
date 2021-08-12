@@ -1,9 +1,8 @@
-import os
 import re
 from collections import defaultdict
 from datetime import timedelta, datetime
 
-from config import log_path, tag_to_keys, form
+from config import tag_to_keys, form
 from .target import Target
 from .activity import ActivityList
 

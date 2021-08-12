@@ -1,9 +1,7 @@
 import tkinter as tk
 
-from tkinter import ttk
-from PIL import ImageTk, Image
 from tkcalendar import Calendar
-from datetime import time, datetime, timedelta
+from datetime import time, datetime
 from collections import namedtuple
 from hashlib import sha256
 
@@ -117,7 +115,7 @@ class TimerGUI(tk.Tk):
     def __init__(self):
         super().__init__()
         self.geometry("1020x500")
-        self.title('TimeNazi')
+        self.title('TrackingNazi')
         self.configure(bg='white')
 
         self.set_icon()
@@ -138,10 +136,10 @@ class TimerGUI(tk.Tk):
         self.timer_stats.target.write()
 
     def set_icon(self):
-        icon = tk.PhotoImage(file=path + "timenazi_icon.png")
+        icon = tk.PhotoImage(file=path + "icon.png")
         self.iconphoto(False, icon)
 
-    #     icon = Image.open(path + "timenazi_icon.png")
+    #     icon = Image.open(path + "icon.png")
     #     icon = icon.resize((50, 50), Image.ANTIALIAS)
     #     img = ImageTk.PhotoImage(icon)
     #     panel = tk.Label(image=img, bg="white")

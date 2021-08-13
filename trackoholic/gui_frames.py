@@ -115,7 +115,7 @@ class TimerGUI(tk.Tk):
     def __init__(self):
         super().__init__()
         self.geometry("1020x500")
-        self.title('TrackingNazi')
+        self.title('Trackoholic')
         self.configure(bg='white')
 
         self.set_icon()

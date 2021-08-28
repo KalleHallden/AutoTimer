@@ -3,8 +3,8 @@ import subprocess
 import re
 from datetime import datetime
 
-from trackoholic.activity import ActivityList
-from trackoholic.listener import PowerListener
+from timenazi.activity import ActivityList
+from timenazi.listener import PowerListener
 
 
 def get_active_window():

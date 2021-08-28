@@ -12,3 +12,8 @@ def test_sum_by_tag():
                 'Thinking': [2, '1:26:36']}
     for tag, (hours, actual_time) in targ.items():
         assert [hours, str(actual_time)] == expected[tag]
+
+
+# def test_gui():
+#     w = ActivityWindow()
+#     w.mainloop()

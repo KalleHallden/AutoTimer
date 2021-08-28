@@ -109,4 +109,5 @@ class TimerStats:
                 overtime = None
             else:
                 overtime = total_time - target_time
-            yield tag, total_time, overtime
+            total_today = tpt[tag].total_seconds() / 3600.
+            yield tag, total_today, overtime

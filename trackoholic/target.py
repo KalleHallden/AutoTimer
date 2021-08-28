@@ -45,7 +45,7 @@ class Target:
 
     def sum_by_tag(self):
         target_time = defaultdict(lambda: [0, timedelta(0)])
-        for goal in self._data.values():
+        for date_str, goal in self._data.items():
             for tag, (target_hours, spent) in goal.items():
                 target_time[tag][0] += target_hours
                 if spent is not None:

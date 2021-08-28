@@ -25,6 +25,9 @@ class Timeline:
     def as_tuple(self):
         return self.x1, self.y1, self.x2, self.y2
 
+    def is_inside(self, x, y):
+        return self.x1 <= x <= self.x2 and self.y1 <= y <= self.y2
+
     def time_to_x(self, t):
         return self.x1 + (t.hour * 3600 + t.minute * 60 + t.second) * self.step
 
@@ -38,7 +41,7 @@ class Timeline:
 
     @staticmethod
     def string_to_color(name):
-        bytes_name = bytes(str(name), 'utf-8')
+        bytes_name = bytes('#q' + str(name), 'utf-8')
         hex_hash = sha256(bytes_name).hexdigest()
         return '#' + hex_hash[:6]
 
@@ -68,6 +71,15 @@ class Canvas(tk.Canvas):
         self.act_timeline = self.tag_timeline = None
         today = datetime.today().strftime(form)
         self.load(today)
+
+        # self.bind("<Button-1>", lambda x: print("LEFT CLICK"))
+        # self.bind("<Double-Button-1>", lambda x: print("DOUBLE CLICK"))
+        # def drag_handler(event):
+        #     print(event.x, event.y)
+        self._drag_start = None
+        self.bind("<ButtonPress-1>", self._start_drag)
+        self.bind("<B1-Motion>", self._on_move_press)
+        self.bind("<ButtonRelease-1>", self._end_drag)
 
     def load(self, date_str):
         self.delete('all')
@@ -110,6 +122,29 @@ class Canvas(tk.Canvas):
                 return
         self.itemconfigure(text_label, text='')
 
+    def _start_drag(self, event):
+        if not self.act_timeline.is_inside(event.x, event.y):
+            return
+        self._drag_start = (event.x, event.y)
+
+    def _on_move_press(self, event):
+        if self._drag_start is None:
+            return
+        if not self.act_timeline.is_inside(event.x, event.y):
+            return
+
+    def _end_drag(self, event):
+        if not self.act_timeline.is_inside(event.x, event.y):
+            self._drag_start = None
+            return
+        drag_end = (event.x, event.y)
+        rect = self.create_rectangle(self._drag_start[0], self.act_timeline.y1 + 1, drag_end[0], self.act_timeline.y2 - 1,
+                                     fill="", outline="#aaaaaa")
+        w = ActivityWindow(self.master).get_info()
+        print(w)
+        self.delete(rect)
+        self._drag_start = None
+
 
 class TimerGUI(tk.Tk):
     def __init__(self):
@@ -133,18 +168,18 @@ class TimerGUI(tk.Tk):
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        self.timer_stats.target.write()
+        if self.timer_stats:
+            self.timer_stats.target.write()
 
     def set_icon(self):
         icon = tk.PhotoImage(file=path + "icon.png")
         self.iconphoto(False, icon)
-
-    #     icon = Image.open(path + "icon.png")
-    #     icon = icon.resize((50, 50), Image.ANTIALIAS)
-    #     img = ImageTk.PhotoImage(icon)
-    #     panel = tk.Label(image=img, bg="white")
-    #     panel.image = img
-    #     panel.grid(column=2, row=0, pady=10, sticky='n')
+        # icon = Image.open(path + "icon.png")
+        # icon = icon.resize((50, 50), Image.ANTIALIAS)
+        # img = ImageTk.PhotoImage(icon)
+        # panel = tk.Label(image=img, bg="white")
+        # panel.image = img
+        # panel.grid(column=2, row=0, pady=10, sticky='n')
 
     def date_selector(self):
         t = datetime.today()
@@ -174,15 +209,58 @@ class TimerGUI(tk.Tk):
 
     def overtime(self):
         text = []
-        for k, (tag, total_time, overtime) in enumerate(self.timer_stats.get_overtimes()):
+        for k, (tag, spent_today, overtime) in enumerate(self.timer_stats.get_overtimes()):
             if tag == "other":
                 continue
             if k > 0:
                 text.append("")
             text.append(tag)
-            text.append("Total time:  {:.2f} hours".format(total_time))
+            text.append("Spent: {:.2f} hours".format(spent_today))
             if overtime is None:
                 text.append("")
                 continue
-            text.append("Overtime:    {:.2f} hours".format(overtime))
+            text.append("Overtime: {:.2f} hours".format(overtime))
         return text
+
+
+class ActivityWindow:
+
+    def __init__(self, parent):
+        self.window = tk.Toplevel(parent)
+        # self.window.title('')
+        # self.window.geometry('180x180')
+        lab = tk.Label(self.window, text="Enter activity:")
+        lab.grid(column=0, row=0, sticky='w', padx=5)
+
+        self.act_var = tk.StringVar()
+        self.text = tk.Entry(self.window, textvariable=self.act_var)
+        self.text.grid(column=0, row=1, columnspan=2, padx=5)
+        self.text.focus()
+
+        tag_lab = tk.Label(self.window, text="Assign tag:")
+        tag_lab.grid(column=0, row=2, sticky='w', padx=5)
+
+        self.tag_sel = tk.StringVar()
+        self.tag_sel.set('Other')
+        tags = ['Work', 'Leisure', 'Sex']
+        for k, tag in enumerate(tags):
+            r = tk.Radiobutton(self.window, text=tag, value=tag, variable=self.tag_sel)
+            r.grid(column=0, row=3+k, sticky='w', padx=5)
+
+        cancel_button = tk.Button(self.window, text='Cancel', command=self.cancel)
+        cancel_button.grid(column=0, row=3 + len(tags), sticky='sw', pady=10)
+
+        add_button = tk.Button(self.window, text='Add', command=self.window.destroy)
+        add_button.grid(column=1, row=3 + len(tags), sticky='se', pady=10)
+
+    def get_info(self):
+        self.window.deiconify()
+        self.window.wait_window()
+        activity_name = self.act_var.get()
+        tag = self.tag_sel.get()
+        return activity_name, tag
+
+    def cancel(self):
+        self.act_var.set('')
+        self.tag_sel.set('')
+        self.window.destroy()

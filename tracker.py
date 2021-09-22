@@ -45,7 +45,7 @@ if __name__ == "__main__":
             now = datetime.now()
 
             # computer was likely suspended
-            if (now - last_record).total_seconds() > 5:
+            if (now - last_record).total_seconds() > 15:
                 print("\n*** waking up from suspension ***\n")
                 al.end_activity(old_window, start_time, last_record)
                 old_window, new_window, start_time = restart(now)

@@ -1,11 +1,13 @@
 import tkinter as tk
 
+from texttable import Texttable
 from tkcalendar import Calendar
 from datetime import time, datetime
 from collections import namedtuple
 from hashlib import sha256
 
 from config import form, path
+from .activity import ActivityList, TimeEntry
 from .stats import TimerStats
 
 Rectangle = namedtuple('Rectangle', 'x1 x2 activity color')
@@ -63,7 +65,8 @@ class Timeline:
 class Canvas(tk.Canvas):
     def __init__(self, master):
         self.master = master
-        super().__init__(master, width=1000, height=270, bg='white', bd=0, highlightthickness=0)
+        self.width = 1000
+        super().__init__(master, width=self.width, height=270, bg='white', bd=0, highlightthickness=0)
 
         self.bind("<Motion>", self.moved)
 
@@ -88,8 +91,8 @@ class Canvas(tk.Canvas):
         self.current_time = self.create_text(10, 240, text="", anchor="nw")
 
         act_times, tag_times = self.master.timer_stats.timeline_stats(date_str)
-        self.act_timeline = Timeline(10, 30, 990, 80, act_times)
-        self.tag_timeline = Timeline(10, 100, 990, 150, tag_times)
+        self.act_timeline = Timeline(10, 30, self.width - 10, 80, act_times)
+        self.tag_timeline = Timeline(10, 100, self.width - 10, 150, tag_times)
         self.create_timeline(self.act_timeline, ticks=False)
         self.create_timeline(self.tag_timeline, ticks=True)
 
@@ -149,7 +152,6 @@ class Canvas(tk.Canvas):
 class TimerGUI(tk.Tk):
     def __init__(self):
         super().__init__()
-        self.geometry("1020x500")
         self.title('TimeNazi')
         self.configure(bg='white')
 
@@ -161,8 +163,7 @@ class TimerGUI(tk.Tk):
         self._frame = Canvas(self)
         self._frame.grid(column=0, row=2, columnspan=5, sticky='s')
 
-        self.listbox = self.scrollbar = None
-        self.overtime_listbox()
+        self.overtime_box()
 
     def __enter__(self):
         return self
@@ -174,61 +175,44 @@ class TimerGUI(tk.Tk):
     def set_icon(self):
         icon = tk.PhotoImage(file=path + "icon.png")
         self.iconphoto(False, icon)
-        # icon = Image.open(path + "icon.png")
-        # icon = icon.resize((50, 50), Image.ANTIALIAS)
-        # img = ImageTk.PhotoImage(icon)
-        # panel = tk.Label(image=img, bg="white")
-        # panel.image = img
-        # panel.grid(column=2, row=0, pady=10, sticky='n')
 
     def date_selector(self):
         t = datetime.today()
         cal = Calendar(self, selectmode="day", year=t.year, month=t.month, day=t.day)
-        cal.grid(column=0, row=0, padx=30, sticky='s')
+        cal.grid(column=0, row=0, padx=10, pady=10, sticky='s')
 
         # Define Function to select the date
         def get_date():
             date_str = datetime.strptime(cal.get_date(), '%m/%d/%y').strftime(form)
             self._frame.load(date_str)
-            self.overtime_listbox()
+            self.overtime_box()
 
         # Create a button to pick the date from the calendar
         button = tk.Button(text="Show tracked time", command=get_date)
         button.grid(column=0, row=1, sticky='n')
 
-    def overtime_listbox(self):
-        text = tk.StringVar(value=self.overtime())
-
-        self.listbox = tk.Listbox(self, listvariable=text, height=11, selectmode='extended')
-        self.listbox.grid(column=4, row=0, rowspan=2, padx=30, pady=10, sticky='nsew')
-
-        # link a scrollbar to a list
-        # self.scrollbar = ttk.Scrollbar(self, orient='vertical', command=self.listbox.yview)
-        # self.listbox['yscrollcommand'] = self.scrollbar.set
-        # self.scrollbar.grid(column=5, row=1, rowspan=2, sticky='nsew')
+    def overtime_box(self):
+        text = tk.Text(self, width=30, height=1, highlightthickness=0, bd=0)
+        text.insert('1.0', self.overtime())
+        text['state'] = 'disabled'
+        text.grid(column=1, row=0, rowspan=2, padx=0, pady=10, sticky='nsew')
 
     def overtime(self):
-        text = []
-        for k, (tag, spent_today, overtime) in enumerate(self.timer_stats.get_overtimes()):
+        table = Texttable()
+        table.set_cols_dtype(['t', 'f', 'f'])
+        table.set_cols_align(["r", "l", "l"])
+        table.add_row(["Tag", "spent", "overtime"])
+        for tag, spent_today, overtime in self.timer_stats.get_overtimes():
             if tag == "other":
                 continue
-            if k > 0:
-                text.append("")
-            text.append(tag)
-            text.append("Spent: {:.2f} hours".format(spent_today))
-            if overtime is None:
-                text.append("")
-                continue
-            text.append("Overtime: {:.2f} hours".format(overtime))
-        return text
+            table.add_row([tag, spent_today, "" if overtime is None else overtime])
+        return table.draw()
 
 
 class ActivityWindow:
 
     def __init__(self, parent):
         self.window = tk.Toplevel(parent)
-        # self.window.title('')
-        # self.window.geometry('180x180')
         lab = tk.Label(self.window, text="Enter activity:")
         lab.grid(column=0, row=0, sticky='w', padx=5)
 
@@ -264,3 +248,10 @@ class ActivityWindow:
         self.act_var.set('')
         self.tag_sel.set('')
         self.window.destroy()
+
+
+def add_activity(activity, start_time, end_time, date, tag):
+    al = ActivityList(date=date)
+    time_entry = TimeEntry(start_time, end_time, 0, 0, 0, 0, specific=True)
+    al.acts[activity].append(time_entry)
+    al.write()

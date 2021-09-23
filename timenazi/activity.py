@@ -1,4 +1,5 @@
 import json
+import os
 from collections import defaultdict
 from datetime import datetime
 from dateutil import parser
@@ -12,8 +13,12 @@ class ActivityList:
         self.acts = self.load()
 
     @property
+    def _folder(self):
+        return str(self._date.month).zfill(2) + '.' + str(self._date.year) + '/'
+
+    @property
     def _filename(self):
-        return log_path + 'log_' + self._date.strftime(form) + '.json'
+        return log_path + self._folder + 'log_' + self._date.strftime(form) + '.json'
 
     def load(self):
         try:
@@ -31,6 +36,10 @@ class ActivityList:
         return acts
 
     def write(self):
+        if not os.path.isdir(log_path):
+            os.mkdir(log_path)
+        if not os.path.isdir(log_path + self._folder):
+            os.mkdir(log_path + self._folder)
         with open(self._filename, 'w') as json_file:
             json.dump(self.serialize(), json_file, indent=4, sort_keys=True)
 

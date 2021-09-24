@@ -150,13 +150,14 @@ class Canvas(tk.Canvas):
 
 
 class TimerGUI(tk.Tk):
-    def __init__(self):
+    def __init__(self, al):
         super().__init__()
         self.title('TimeNazi')
         self.configure(bg='white')
 
         self.set_icon()
 
+        self.al = al  # current activity list
         self.timer_stats = TimerStats()
         self.date_selector()
 
@@ -169,8 +170,10 @@ class TimerGUI(tk.Tk):
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
+        print("Finalizing..")
         if self.timer_stats:
             self.timer_stats.target.write()
+        self.al.write()
 
     def set_icon(self):
         icon = tk.PhotoImage(file=path + "icon.png")

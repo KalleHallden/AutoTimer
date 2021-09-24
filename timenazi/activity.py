@@ -9,16 +9,16 @@ from config import form, log_path
 
 class ActivityList:
     def __init__(self, date=None):
-        self._date = date or datetime.today()
-        self.acts = self.load()
+        self.date = date or datetime.today()
+        self.entries = self.load()
 
     @property
     def _folder(self):
-        return str(self._date.month).zfill(2) + '.' + str(self._date.year) + '/'
+        return str(self.date.month).zfill(2) + '.' + str(self.date.year) + '/'
 
     @property
     def _filename(self):
-        return log_path + self._folder + 'log_' + self._date.strftime(form) + '.json'
+        return log_path + self._folder + 'log_' + self.date.strftime(form) + '.json'
 
     def load(self):
         try:
@@ -29,11 +29,11 @@ class ActivityList:
             return defaultdict(list)
         if not data:
             return defaultdict(list)
-        acts = defaultdict(list)
+        entries = defaultdict(list)
         for activity in data['activities']:
             time_entries = self.get_time_entries_from_json(activity['time_entries'])
-            acts[activity['name']].extend(time_entries)
-        return acts
+            entries[activity['name']].extend(time_entries)
+        return entries
 
     def write(self):
         if not os.path.isdir(log_path):
@@ -61,25 +61,25 @@ class ActivityList:
     
     def serialize(self):
         d = {'activities': []}
-        for name, time_entries in self.acts.items():
+        for name, time_entries in self.entries.items():
             entry = {'name': name, 'time_entries': [t.serialize() for t in time_entries]}
             d['activities'].append(entry)
         return d
 
-    def append(self, acts):
-        for name, time_entries in self.acts.items():
-            acts[name].extend(time_entries)
+    def append(self, entries):
+        for name, time_entries in self.entries.items():
+            entries[name].extend(time_entries)
 
     def end_activity(self, activity, start_time, end_time):
         start, end = start_time.strftime('%H:%M:%S'), end_time.strftime('%H:%M:%S')
         print("Enter activity: {}\nfrom: {}\nto:   {}\n".format(activity, start, end))
         time_entry = TimeEntry(start_time, end_time, 0, 0, 0, 0, specific=True)
-        self.acts[activity].append(time_entry)
+        self.entries[activity].append(time_entry)
         self.write()
         # next day has arrived
-        if end_time.day != self._date.day:
-            self._date = end_time
-            self.acts = defaultdict(list)
+        if end_time.day != self.date.day:
+            self.date = end_time
+            self.entries.clear()
 
 
 class TimeEntry:

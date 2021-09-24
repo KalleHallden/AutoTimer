@@ -33,13 +33,14 @@ class Timeline:
     def time_to_x(self, t):
         return self.x1 + (t.hour * 3600 + t.minute * 60 + t.second) * self.step
 
-    def x_to_time(self, x):
+    def x_to_time(self, x, date=None):
         seconds = int((x - self.x1) / self.step)
         hour = seconds // 3600
         seconds = seconds % 3600
         minute = seconds // 60
         seconds = seconds % 60
-        return time(hour=hour, minute=minute, second=seconds).strftime('%H:%M:%S')
+        y, m, d = (date.year, date.month, date.day) if date else (2021, 1, 1)
+        return datetime(year=y, month=m, day=d, hour=hour, minute=minute, second=seconds)
 
     @staticmethod
     def string_to_color(name):
@@ -72,8 +73,8 @@ class Canvas(tk.Canvas):
 
         self.act_text, self.tag_text, self.current_time = None, None, None
         self.act_timeline = self.tag_timeline = None
-        today = datetime.today().strftime(form)
-        self.load(today)
+        self.active_date = datetime.today().strftime(form)
+        self.load(self.active_date)
 
         # self.bind("<Button-1>", lambda x: print("LEFT CLICK"))
         # self.bind("<Double-Button-1>", lambda x: print("DOUBLE CLICK"))
@@ -85,6 +86,7 @@ class Canvas(tk.Canvas):
         self.bind("<ButtonRelease-1>", self._end_drag)
 
     def load(self, date_str):
+        self.active_date = date_str
         self.delete('all')
         self.act_text = self.create_text(10, 200, text="", anchor="nw")
         self.tag_text = self.create_text(10, 220, text="", anchor="nw")
@@ -112,7 +114,7 @@ class Canvas(tk.Canvas):
         ys = [(self.act_timeline.y1, self.act_timeline.y2), (self.tag_timeline.y1, self.tag_timeline.y2)]
         if self.act_timeline.x1 <= event.x < self.act_timeline.x2 and \
                 (ys[0][0] <= event.y <= ys[0][1] or ys[1][0] <= event.y <= ys[1][1]):
-            time_text = self.act_timeline.x_to_time(event.x)
+            time_text = self.act_timeline.x_to_time(event.x).strftime('%H:%M:%S')
         self.itemconfigure(self.current_time, text=time_text)
 
         self.move_check(event, self.act_timeline, self.act_text, ys)
@@ -143,73 +145,26 @@ class Canvas(tk.Canvas):
         drag_end = (event.x, event.y)
         rect = self.create_rectangle(self._drag_start[0], self.act_timeline.y1 + 1, drag_end[0], self.act_timeline.y2 - 1,
                                      fill="", outline="#aaaaaa")
-        w = ActivityWindow(self.master).get_info()
-        print(w)
+        self._add_activity(self._drag_start[0], drag_end[0])
         self.delete(rect)
         self._drag_start = None
 
-
-class TimerGUI(tk.Tk):
-    def __init__(self, al):
-        super().__init__()
-        self.title('TimeNazi')
-        self.configure(bg='white')
-
-        self.set_icon()
-
-        self.al = al  # current activity list
-        self.timer_stats = TimerStats()
-        self.date_selector()
-
-        self._frame = Canvas(self)
-        self._frame.grid(column=0, row=2, columnspan=5, sticky='s')
-
-        self.overtime_box()
-
-    def __enter__(self):
-        return self
-
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        print("Finalizing..")
-        if self.timer_stats:
-            self.timer_stats.target.write()
-        self.al.write()
-
-    def set_icon(self):
-        icon = tk.PhotoImage(file=path + "icon.png")
-        self.iconphoto(False, icon)
-
-    def date_selector(self):
-        t = datetime.today()
-        cal = Calendar(self, selectmode="day", year=t.year, month=t.month, day=t.day)
-        cal.grid(column=0, row=0, padx=10, pady=10, sticky='s')
-
-        # Define Function to select the date
-        def get_date():
-            date_str = datetime.strptime(cal.get_date(), '%m/%d/%y').strftime(form)
-            self._frame.load(date_str)
-            self.overtime_box()
-
-        # Create a button to pick the date from the calendar
-        button = tk.Button(text="Show tracked time", command=get_date)
-        button.grid(column=0, row=1, sticky='n')
-
-    def overtime_box(self):
-        text = tk.Text(self, width=30, height=1, highlightthickness=0, bd=0)
-        text.insert('1.0', self.overtime())
-        text['state'] = 'disabled'
-        text.grid(column=1, row=0, rowspan=2, padx=0, pady=10, sticky='nsew')
-
-    def overtime(self):
-        table = Texttable()
-        table.set_cols_dtype(['t', 'f', 'f'])
-        table.set_cols_align(["r", "l", "l"])
-        table.add_row(["Tag", "spent", "overtime"])
-        for tag, spent_today, overtime in self.timer_stats.get_overtimes():
-            if tag == "other":
-                continue
-            table.add_row([tag, spent_today, "" if overtime is None else overtime])
-        return table.draw()
+    def _add_activity(self, x0, x1):
+        date = datetime.strptime(self.active_date, form)
+        t0 = self.act_timeline.x_to_time(x0, date=date)
+        t1 = self.act_timeline.x_to_time(x1, date=date)
+        time_entry = TimeEntry(t0, t1, 0, 0, 0, 0, specific=True)
+        activity, tag = ActivityWindow(self.master).get_info()
+        if activity == '':
+            return
+        al = self.master.timer_stats.acts[self.active_date]
+        al.entries[activity].append(time_entry)
+        al.write()
+        if self.active_date == self.master.current_al.date.strftime(form):
+            print('Updating current activity list..')
+            self.master.current_al.entries[activity].append(time_entry)
+        print(activity, tag)
+        self.load(self.active_date)
 
 
 class ActivityWindow:
@@ -253,8 +208,64 @@ class ActivityWindow:
         self.window.destroy()
 
 
-def add_activity(activity, start_time, end_time, date, tag):
-    al = ActivityList(date=date)
-    time_entry = TimeEntry(start_time, end_time, 0, 0, 0, 0, specific=True)
-    al.acts[activity].append(time_entry)
-    al.write()
+class TimerGUI(tk.Tk):
+    def __init__(self, current_al):
+        super().__init__()
+        self.title('TimeNazi')
+        self.configure(bg='white')
+
+        self.set_icon()
+
+        self.current_al = current_al
+        self.timer_stats = TimerStats()
+        self.date_selector()
+
+        self._frame = Canvas(self)
+        self._frame.grid(column=0, row=2, columnspan=5, sticky='s')
+
+        self.overtime_box()
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        print("Finalizing..")
+        if self.timer_stats:
+            self.timer_stats.target.write()
+        self.current_al.write()
+
+    def set_icon(self):
+        icon = tk.PhotoImage(file=path + "icon.png")
+        self.iconphoto(False, icon)
+
+    def date_selector(self):
+        t = datetime.today()
+        cal = Calendar(self, selectmode="day", year=t.year, month=t.month, day=t.day)
+        cal.grid(column=0, row=0, padx=10, pady=10, sticky='s')
+
+        # Define Function to select the date
+        def get_date():
+            date_str = datetime.strptime(cal.get_date(), '%m/%d/%y').strftime(form)
+            self._frame.load(date_str)
+            self.overtime_box()
+
+        # Create a button to pick the date from the calendar
+        button = tk.Button(text="Show tracked time", command=get_date)
+        button.grid(column=0, row=1, sticky='n')
+
+    def overtime_box(self):
+        text = tk.Text(self, width=30, height=1, highlightthickness=0, bd=0)
+        text.insert('1.0', self.overtime())
+        text['state'] = 'disabled'
+        text.grid(column=1, row=0, rowspan=2, padx=0, pady=10, sticky='nsew')
+
+    def overtime(self):
+        table = Texttable()
+        table.set_cols_dtype(['t', 'f', 'f'])
+        table.set_cols_align(["r", "l", "l"])
+        table.add_row(["Tag", "spent", "overtime"])
+        for tag, spent_today, overtime in self.timer_stats.get_overtimes():
+            if tag == "other":
+                continue
+            table.add_row([tag, spent_today, "" if overtime is None else overtime])
+        return table.draw()

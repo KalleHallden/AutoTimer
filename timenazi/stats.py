@@ -27,7 +27,7 @@ class TimerStats:
         if date_str not in self.acts or date_str == datetime.today().strftime(form):
             # print('Reading date: {}'.format(date_str))
             self.acts[date_str] = ActivityList(date=datetime.strptime(date_str, form))
-        return self.acts[date_str].acts
+        return self.acts[date_str].entries
 
     def order_by_time(self, date_str):
         times = []

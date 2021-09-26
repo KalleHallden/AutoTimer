@@ -24,7 +24,7 @@ class Target:
             with open(log_path + self.filename, 'r') as json_file:
                 history = json.load(json_file)
         except (FileNotFoundError, json.decoder.JSONDecodeError) as e:
-            print(e)
+            logging.error(e)
             history = dict()
         self._end_date = end_date
         for date in date_range(start_date, self._end_date):

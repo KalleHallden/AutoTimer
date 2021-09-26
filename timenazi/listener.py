@@ -1,3 +1,4 @@
+import logging
 import socket
 import time
 
@@ -8,7 +9,7 @@ class PowerListener:
     def __init__(self):
         self.sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
         self.sock.connect("/var/run/acpid.socket")
-        print("Connected to acpid")
+        logging.info("Connected to acpid")
 
     def read_events(self):
         events = self.sock.recv(4096)
@@ -16,7 +17,6 @@ class PowerListener:
             event = event.split(' ')
             if len(event) < 2:
                 continue
-            # print(event)
 
             if event[0] == 'ac_adapter':
                 if event[3] == '00000001':
@@ -35,7 +35,7 @@ class PowerListener:
     def lid_closed(self):
         message = self.read_events()
         if message == 'Laptop lid closed':
-            print("\n*** {} ***\n".format(message))
+            logging.info("\n*** {} ***\n".format(message))
             return True
         return False
 
@@ -45,7 +45,7 @@ class PowerListener:
             time.sleep(1)
             message = self.read_events()
             if message == 'Laptop lid opened':
-                print("\n*** {} ***\n".format(message))
+                logging.info("\n*** {} ***\n".format(message))
                 return
 
 

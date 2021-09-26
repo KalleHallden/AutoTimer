@@ -1,3 +1,4 @@
+import logging
 import re
 from collections import defaultdict
 from datetime import timedelta, datetime
@@ -25,7 +26,7 @@ class TimerStats:
 
     def activities_by_date(self, date_str):
         if date_str not in self.acts or date_str == datetime.today().strftime(form):
-            # print('Reading date: {}'.format(date_str))
+            # logging.info('Reading date: {}'.format(date_str))
             self.acts[date_str] = ActivityList(date=datetime.strptime(date_str, form))
         return self.acts[date_str].entries
 
@@ -95,7 +96,7 @@ class TimerStats:
             self.target = Target(today)
 
         date_str = self._date.strftime(form)
-        print("Loading data from {}".format(date_str))
+        logging.info("Loading data from {}".format(date_str))
         tpt = self.time_per_tag(date_str)
         self.target.update(date_str, tpt)
 

@@ -1,13 +1,14 @@
+import logging
 import tkinter as tk
 
 from texttable import Texttable
 from tkcalendar import Calendar
-from datetime import time, datetime
+from datetime import datetime
 from collections import namedtuple
 from hashlib import sha256
 
-from config import form, path
-from .activity import ActivityList, TimeEntry
+from config import form, path, tag_to_keys
+from .activity import TimeEntry
 from .stats import TimerStats
 
 Rectangle = namedtuple('Rectangle', 'x1 x2 activity color')
@@ -80,6 +81,7 @@ class Canvas(tk.Canvas):
         # self.bind("<Double-Button-1>", lambda x: print("DOUBLE CLICK"))
         # def drag_handler(event):
         #     print(event.x, event.y)
+        self._drag_rect = None
         self._drag_start = None
         self.bind("<ButtonPress-1>", self._start_drag)
         self.bind("<B1-Motion>", self._on_move_press)
@@ -137,16 +139,18 @@ class Canvas(tk.Canvas):
             return
         if not self.act_timeline.is_inside(event.x, event.y):
             return
+        if self._drag_rect is not None:
+            self.delete(self._drag_rect)
+        drag_end = (event.x, event.y)
+        self._drag_rect = self.create_rectangle(self._drag_start[0], self.act_timeline.y1+1,
+                                                drag_end[0], self.act_timeline.y2-1, fill="", outline="#aaaaaa")
 
     def _end_drag(self, event):
         if not self.act_timeline.is_inside(event.x, event.y):
             self._drag_start = None
             return
-        drag_end = (event.x, event.y)
-        rect = self.create_rectangle(self._drag_start[0], self.act_timeline.y1 + 1, drag_end[0], self.act_timeline.y2 - 1,
-                                     fill="", outline="#aaaaaa")
-        self._add_activity(self._drag_start[0], drag_end[0])
-        self.delete(rect)
+        self._add_activity(self._drag_start[0], event.x)
+        self.delete(self._drag_rect)
         self._drag_start = None
 
     def _add_activity(self, x0, x1):
@@ -161,10 +165,11 @@ class Canvas(tk.Canvas):
         al.entries[activity].append(time_entry)
         al.write()
         if self.active_date == self.master.current_al.date.strftime(form):
-            print('Updating current activity list..')
+            logging.info('Updating current activity list..')
             self.master.current_al.entries[activity].append(time_entry)
-        print(activity, tag)
+        logging.info(activity, tag)
         self.load(self.active_date)
+        self.master.overtime_box()
 
 
 class ActivityWindow:
@@ -184,7 +189,7 @@ class ActivityWindow:
 
         self.tag_sel = tk.StringVar()
         self.tag_sel.set('Other')
-        tags = ['Work', 'Leisure', 'Sex']
+        tags = list(tag_to_keys.keys())
         for k, tag in enumerate(tags):
             r = tk.Radiobutton(self.window, text=tag, value=tag, variable=self.tag_sel)
             r.grid(column=0, row=3+k, sticky='w', padx=5)
@@ -229,7 +234,7 @@ class TimerGUI(tk.Tk):
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        print("Finalizing..")
+        logging.info("Finalizing..")
         if self.timer_stats:
             self.timer_stats.target.write()
         self.current_al.write()

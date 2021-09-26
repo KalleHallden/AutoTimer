@@ -20,7 +20,7 @@ tag_to_keys = {
              'Figure', 'Causal deconvolution', 'frai-2020', 'Zenil', 'algorithmic complexity', 'jphysparis',
              'free-energy', 'aixi_approx', 'neco_a_00999.pdf', 'Free Energy', 'Knowledge Seeking', 'knowledge-seeking',
              'bigplan', 'Thousand Brains'],
-    'Thinking': ['thoughts_on_AGI', 'Gedanken'],
+    'Thinking': ['thoughts_on_AGI'],
 }
 
 # JSON file storing the target time to spend on each tag

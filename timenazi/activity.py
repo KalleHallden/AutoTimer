@@ -1,4 +1,5 @@
 import json
+import logging
 import os
 from collections import defaultdict
 from datetime import datetime
@@ -25,7 +26,7 @@ class ActivityList:
             with open(self._filename, 'r') as f:
                 data = json.load(f)
         except (FileNotFoundError, json.decoder.JSONDecodeError) as e:
-            print(e)
+            logging.error(e)
             return defaultdict(list)
         if not data:
             return defaultdict(list)
@@ -72,7 +73,7 @@ class ActivityList:
 
     def end_activity(self, activity, start_time, end_time):
         start, end = start_time.strftime('%H:%M:%S'), end_time.strftime('%H:%M:%S')
-        print("Enter activity: {}\nfrom: {}\nto:   {}\n".format(activity, start, end))
+        logging.info("Enter activity: {}\nfrom: {}\nto:   {}\n".format(activity, start, end))
         time_entry = TimeEntry(start_time, end_time, 0, 0, 0, 0, specific=True)
         self.entries[activity].append(time_entry)
         self.write()

@@ -1,3 +1,4 @@
+import logging
 import time
 import subprocess
 import re
@@ -26,7 +27,7 @@ def get_active_window():
 
 def restart(current_time):
     w = get_active_window()
-    print("Restart at: {}\n".format(current_time))
+    logging.info("Restart at: {}\n".format(current_time))
     return w, w, current_time
 
 
@@ -41,7 +42,7 @@ def window_listener(al):
 
         # computer was likely suspended
         if (now - last_record).total_seconds() > 15:
-            print("\n*** waking up from suspension ***\n")
+            logging.info("\n*** waking up from suspension ***\n")
             al.end_activity(old_window, start_time, last_record)
             old_window, new_window, start_time = restart(now)
 

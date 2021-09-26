@@ -8,7 +8,7 @@ setup(
   author='Arthur Franz',
   author_email='af271@protonmail.com',
   url='https://github.com/af271/TimeNazi/tree/af271',
-  download_url='https://github.com/af271/TimeNazi/archive/v_01.tar.gz',
+  download_url='https://github.com/af271/TimeNazi/archive/refs/tags/v0.1-alpha.tar.gz',
   keywords=['time tracking', 'time management', 'autotagging'],
   install_requires=[
           'texttable',

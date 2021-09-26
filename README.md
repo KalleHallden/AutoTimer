@@ -21,9 +21,5 @@ To get started, configure config.py:
 - the first date for logging
 - <tag_to_keys> maps tags to keywords
 - set workday and holiday target times, e.g. how many hours you want to spend "Programming" or "Reading" etc. 
-- `python3 tracker.py` runs the tracker in the background
 - start the GUI with ./gui.py
-
-Dependencies:
-- python-dateutil
 

@@ -7,7 +7,7 @@ Dependencies:
 - selenium
 
 
-Windows Depencies
+Windows Dependencies
 
 - pywin32
 - python-dateutil
